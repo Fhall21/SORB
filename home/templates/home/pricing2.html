@@ -1,0 +1,265 @@
+{% extends "home/home_base.html" %}
+
+{% block title %}
+{% endblock %}
+
+
+{% block body %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Pricing</h1>
+      <p class="lead">Choose the right plan for you. All plans provide a 30 day trial.</p>
+    </div>
+
+<div class='container'>
+<div class="card-group text-center">
+        
+        <div class="card text-white mb-3" style="background-color: #2E8B57;">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Basic Plan</h4>
+          </div>
+          <div class="card-body">
+          	<div style="color: white;">
+            <h1 class="card-title pricing-card-title">$12<small>/mo </small></h1>
+            <h2 class="card-title pricing-card-title ">OR</h2>
+            <h1 class="card-title pricing-card-title">$120<small >/yr</small></h1> 
+            </div>           
+            <ul class="list-unstyled mt-3 mb-4">
+			  <li>3 badge sumbitions per request</li><br>
+              <li>Access to scout progress/badgework database</li><br>
+             <li>Personal record page for each scout</li><br>
+
+              <li>Priority email support</li><br>
+            </ul>
+            <div class="register">
+			<!-- Trigger/Open The Modal -->
+<button id="myBtnB" class="btn btn-lg btn-block btn-outline-primary">Sign Up</button>
+
+<!-- The Modal -->
+<div id="myModalB" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+          <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register. Basic Plan</h5><p id="test"></p>
+          <span class="close" id="closeB">&times;</span>
+      </div>
+       <div class="modal-body">
+                <!-- Error Presentation --->
+        <div class="alert alert-danger" role="alert" id="error_spotB" style="display: none;">
+  {% for message in Berror %}
+  {% for item in message %}
+      {% if forloop.counter == 1 %}
+      <p>The {{ item }} field was incorrectly completed as:<p>
+      {% else %}
+      <ul>
+        {% for i in item %}
+        <li>{{ i }}</li>
+      </ul>
+
+          {% endfor %}
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+For privacy reasons, all fields have been cleared.
+
+
+
+        </div>
+        We are excited to see you want to join us. Complete the quick details below and you'll shortly be able to get going!
+        <br>
+        <br>
+        <h6><b>Steps to follow:</b></h6>
+        <ol>
+          <li>Complete the details about your troop below,</li>
+          <li>Click <i>Pay with card</i>,</li>
+          <li>Complete the payment details,</li>
+          <li>Once you receive the green tick, wait for your payment to be processed. If everything was entered correctly, you will be sent to another page for confirmation shortly aftwards. Otherwise you will be sent back to this page to try again.</li>
+        </ol>
+        <br>
+        <h6>Troop Details:</h6>
+        <p><i>These will be used to generate your logon details and will not be publically shared.</i></p>
+<hr>
+<form method="post" id="myFormB">
+    {% csrf_token %}
+    {% include 'bf_form.html' with form=formB %}
+    <hr>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="{{ key }}"
+    data-description="Basic Plan"
+    data-name="SORB"
+    data-amount="1200"
+    data-currency="AUD"
+    data-locale="auto"></script>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+      </div>
+    </div>
+        </div>
+        <div class="card text-white mb-3" style="background-color: #8B0000;">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Premium</h4>
+          </div>
+          <div class="card-body">
+          	<div style="color: white;">
+            <h1 class="card-title pricing-card-title">$16<small >/mo </small></h1>
+            <h2 class="card-title pricing-card-title ">OR</h2>
+            <h1 class="card-title pricing-card-title">$160<small >/yr</small></h1>
+        </div>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>12 badge sumbitions per request</li><br>
+              <li>Access to scout progress/badgework database</li><br>
+              <li>Personal record page for each scout</li><br>
+              <li>Online Scout Book</li><br>
+              <li>Automated badge report</li><br>
+              <li>Phone and email support</li>
+            </ul>
+            <div class="register" style="color: black;text-align: left;">
+            <!-- Trigger/Open The Modal -->
+<button id="myBtnA" class="btn btn-lg btn-block btn-outline-primary">Sign Up</button>
+
+<!-- The Modal -->
+<div id="myModalA" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+          <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register. Premium Plan</h5>
+          <span class="close" id="closeA">&times;</span>
+      </div>
+       <div class="modal-body">
+        <div class="alert alert-danger" role="alert" id="error_spotA" style="display: none;">
+
+ {% for message in Aerror %}
+  {% for item in message %}
+      {% if forloop.counter == 1 %}
+      <p>The {{ item }} field was incorrectly completed as:<p>
+      {% else %}
+      <ul>
+        {% for i in item %}
+        <li>{{ i }}</li>
+      </ul>
+
+          {% endfor %}
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+
+
+
+        </div>
+        We are excited to see you want to join us. Complete the quick details below and you'll shortly be able to get going!
+        <br>
+        <br>
+        <h6><b>Steps to follow:</b></h6>
+        <ol>
+          <li>Complete the details about your troop below,</li>
+          <li>Click <i>Pay with card</i>,</li>
+          <li>Complete the payment details,</li>
+          <li>Once you receive the green tick, wait for your payment to be processed. If everything was entered correctly, you will be sent to another page for confirmation shortly aftwards. Otherwise you will be sent back to this page to try again.</li>
+        </ol>
+        <br>
+        <h6>Troop Details:</h6>
+        <p><i>These will be used to generate your logon details and will not be publically shared.</i></p>
+    <form method="post" id="myFormA">
+        {% csrf_token %}
+        {% include 'bf_form.html' with form=formA %}
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ key }}"
+        data-description="Premium Plan"
+        data-name="SORB"
+        data-amount="1600"
+        data-currency="AUD"
+        data-locale="auto"></script>
+    </form> </div>
+
+  </div>
+
+</div>
+            </div>
+          </div></div>
+      </div>
+</div>
+<br><br>
+
+
+<script>
+
+
+// Get the modal
+var modalB = document.getElementById('myModalB');
+var modalA = document.getElementById('myModalA');
+
+
+// Get the button that opens the modal
+var btnB = document.getElementById("myBtnB");
+var btnA = document.getElementById("myBtnA");
+
+// Get the form
+var myFormB = document.getElementById("myFormB");
+var myFormA = document.getElementById("myFormA");
+
+// Get the <span> element that closes the modal
+var spanB = document.getElementById("closeB");
+var spanA = document.getElementById("closeA");
+
+var blank_error = "{{ blank_error }}";
+var blank_A = "{{ blank_A }}";
+var blank_B = "{{ blank_B }}";
+
+var error_spotA = document.getElementById("error_spotA");
+var error_spotB = document.getElementById("error_spotB");
+
+// When the user clicks on <span> (x), close the modal
+spanB.onclick = function() {
+    modalB.style.display = "none";
+}
+spanA.onclick = function(){
+    modalA.style.display = "none";
+}
+
+
+// When the user clicks the button, open the modal 
+btnB.onclick = function() {
+    modalB.style.display = "block";
+}
+btnA.onclick = function(){
+    modalA.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modalB) {
+        modalB.style.display = "none";
+    }else if (event.target == modalA){
+        modalA.style.display = "none";
+    }
+}
+
+window.onload = function(){
+  if (blank_B == "True"){
+    error_spotB.style.display = "block";
+    window.alert("Errors have occured while processing the troop deails. Please try again");
+    modalB.style.display = "block";
+
+    }
+    else if (blank_A == "True"){
+        error_spotA.style.display = "block";
+        window.alert("Errors have occured while processing the troop deails. Please try again");
+        modalA.style.display = "block";
+    }
+    else if (blank_error == "True"){
+        window.alert("You forgot to fill any fields! Please try again");
+
+    }
+  }
+$(document).ready(function() {
+    $('.has-popover').popover({'trigger':'hover'});
+});
+</script>
+
+
+{% endblock %}

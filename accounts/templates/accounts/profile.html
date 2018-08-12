@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block body %}
+<style type="text/css">
+	/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    color: black;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #100;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.register {
+  color: black;
+  text-align: left;
+}
+
+</style>
+
+
+
+
+<div class="container">
+	<h1>Hey {{ user.first_name }}</h1>
+	<img src="{{ user.userprofile.image.url }}" width="240">
+	<h2>These are your account details:</h2>
+	<br>
+	<h3>Name: {{ user.first_name }} {{ user.last_name }}</h3>
+	<h3>Troop: {{ user.userprofile.troop }}</h3>
+
+</br>
+	<h3>Username: {{ user }}</h3>
+	<h3>Email: {{ user.email }}</h3>
+
+	<a class="btn btn-outline-danger" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}"" role="button">Badge Progress</a>
+
+	<button id="myBtnEdit" class="btn btn-outline-secondary" >Edit Profile</button>
+
+<!-- The Modal -->
+<div id="myModalEdit" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+          <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+          <span class="close" id="closeEdit">&times;</span>
+      </div>
+       <div class="modal-body">
+
+    <form method="post" id="myFormEdit">
+        {% csrf_token %}
+        {% include 'bf_form.html' with form=Editform %}
+        <button class="btn btn-lg btn-block btn-primary" type="submit">Submit</button>
+
+    </form> </div>
+  </div>
+</div>
+
+	<button id="myBtnPass" class="btn btn-outline-secondary">Edit Password</button>
+	<div id="myModalPass" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+          <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Password</h5>
+          <span class="close" id="closePass">&times;</span>
+      </div>
+       <div class="modal-body">
+
+    <form method="post" id="myFormPass">
+        {% csrf_token %}
+        {% include 'bf_form.html' with form=Passform %}
+        <button class="btn btn-lg btn-block btn-primary" type="submit">Submit</button>
+    </form> </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<script type="text/javascript">
+
+// any errors
+var error = "{{ error }}";
+var success = "{{ success }}";
+
+
+
+// Get the modal
+
+var modalEdit = document.getElementById('myModalEdit');
+var modalPass = document.getElementById('myModalPass');
+
+// Get the button that opens the modal
+var btnEdit = document.getElementById("myBtnEdit");
+var btnPass = document.getElementById("myBtnPass");
+
+// Get the form
+var myFormEdit = document.getElementById("myFormEdit");
+var myFormPass = document.getElementById("myFormPass");
+
+// Get the <span> element that closes the modal
+var spanEdit = document.getElementById("closeEdit");
+var spanPass = document.getElementById("closePass");
+
+var blank_error = "{{ blank_error }}";
+var blank_Pass = "{{ blank_Pass }}";
+var blank_B = "{{ blank_Edit }}";
+
+/* Checking tool
+window.onload = function(){
+	alert("Pass");
+}
+*/
+// When the user clicks on <span> (x), close the modal
+spanEdit.onclick = function() {
+    modalEdit.style.display = "none";
+}
+spanPass.onclick = function(){
+    modalPass.style.display = "none";
+}
+
+
+// When the user clicks the button, open the modal 
+btnEdit.onclick = function() {
+    modalEdit.style.display = "block";
+}
+btnPass.onclick = function(){
+    modalPass.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modalEdit) {
+        modalEdit.style.display = "none";
+    }else if (event.target == modalPass){
+        modalPass.style.display = "none";
+    }
+}
+
+window.onload = function(){
+    if (error == "True"){
+      window.alert("An error occured, please try again.");
+    }
+    else if (success == "True"){
+      window.alert("Successfully changed details!");
+    }
+  }
+/*
+var error_spotPass = document.getElementById("error_spotPass");
+var error_spotEdit = document.getElementById("error_spotEdit");
+
+window.onload = function(){
+  if (blank_Edit == "True"){
+    error_spotEdit.style.display = "block";
+    window.alert("Errors have occured while processing the troop deails. Please try again");
+    modalEdit.style.display = "block";
+
+    }
+    else if (blank_Pass == "True"){
+        error_spotA.style.display = "block";
+        window.alert("Errors have occured while processing the troop deails. Please try again");
+        modalPass.style.display = "block";
+    }
+    else if (blank_error == "True"){
+        window.alert("You forgot to fill any fields! Please try again");
+
+    }
+  }
+  */
+</script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'admin/base_site.html' %}
+
+{% block pagestyling %}
+
+	{% endblock %}
+{% block content %}
+<style type="text/css">
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+  }
+</style>
+<div class="container">
+	<h2>In terms of months, what time frame do you whish to be included within the report?</h2><br>
+
+	<div class="btn-toolbar" role="toolbar" aria-label="1-3 months" id="buttons">
+		
+	  <div class="btn-group mr-2" role="group" aria-label="First group">
+	    <a class="btn btn-info" href="{% url 'leaders:badge_report' month=1  %}">1</a>
+	    <a class="btn btn-info"href="{% url 'leaders:badge_report' month=2  %}">2</a>
+	    <a class="btn btn-info"href="{% url 'leaders:badge_report' month=3  %}">3</a>
+
+		</div>
+
+		<div class="btn-group mr-2" role="group" aria-label="Second group">
+	    <a class="btn btn-info"href="{% url 'leaders:badge_report' month=4  %}">4</a>
+	    <a class="btn btn-info"href="{% url 'leaders:badge_report' month=5  %}">5</a>
+	    <a class="btn btn-info"href="{% url 'leaders:badge_report' month=6  %}">6</a>
+	</div>
+</div>
+<br>
+<br><br>
+
+{% endblock %}

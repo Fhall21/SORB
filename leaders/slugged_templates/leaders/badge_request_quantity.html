@@ -1,0 +1,36 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+
+<div class="container">
+	<h2>Tell us, how many new badges have been finished?</h2><br>
+
+	<div class="btn-toolbar" role="toolbar" aria-label="1-4 scouts">
+		
+	  <div class="btn-group mr-2" role="group" aria-label="First group">
+	    <a class="btn btn-info" style="color: white;"  href="{% url 'leaders:specific_badge_request' quantity=1 slug=request.user.userprofile.troop %}">1</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=2 slug=request.user.userprofile.troop %}">2</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=3 slug=request.user.userprofile.troop %}">3</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=4 slug=request.user.userprofile.troop %}">4</a>
+		</div>
+
+		<div class="btn-group mr-2" role="group" aria-label="Second group">
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=5 slug=request.user.userprofile.troop %}">5</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=6 slug=request.user.userprofile.troop %}">6</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=7 slug=request.user.userprofile.troop %}">7</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=8 slug=request.user.userprofile.troop %}">8</a>
+		</div>
+
+	    <div class="btn-group" role="group" aria-label="Third group">
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=9 slug=request.user.userprofile.troop %}">9</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=10 slug=request.user.userprofile.troop %}">10</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=11 slug=request.user.userprofile.troop %}">11</a>
+	    <a class="btn btn-info" style="color: white;" href="{% url 'leaders:specific_badge_request' quantity=12 slug=request.user.userprofile.troop %}">12</a>
+	  </div>	
+
+
+</div>
+<br>
+<br><br>
+
+{% endblock %}

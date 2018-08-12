@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br><br>
+<div class="container">
+	<h1 style={{ colour }}>{{ badge }} Progress</h1>
+			<div class="progress">
+		<div class="progress-bar bg-{{ button_type }} progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{  percent }}%" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100">{{ percent }}%</div> 
+			</div>
+			<br><!-- List of badges -->			
+			<h1  style={{ colour }}> Your current progress:</h1>
+			<br>
+			<h2 style={{ colour }}>Target Badges:</h2>
+			<h3>
+				<ul style={{ colour }}>
+					{% for badge in badge_progress_list %}
+					<li style={{ colour }}><a href="#"  style={{ colour }}>{{ badge }}</a></li>
+				</ul>
+				{% empty %}
+				<i style="{{ colour }}">You have not completed any target badges yet. Would you like to have a read of the <a href="#{{ badge }} target badges">scout guide?</a></i>{% endfor %}
+			</h3>
+			<br>
+			<h2  style="color:yellow">Proficiency Badges:</h2>
+			<h3>
+				{% for badge in proficiency_progress_list %}
+				<ul  style="color:yellow">
+					<li  style="color:yellow"><a href="#" style="color:yellow">{{ badge }}</a></li>
+				{% empty %}
+				</ul>
+				<i   style="color:yellow">You have not completed any proficiency badge yet. Would you like to have a read of the <a href="#proficiency badges">scout guide?</a>{% endfor %}</i>
+			</h3>
+<br>
+<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="navigation">
+	
+			{% if pioneer %}
+			<a class="btn btn-outline-light" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}" style="text-align: left">Home</a>	
+			<a class="btn btn-outline-info" href="{% url 'accounts:explorer_progress' slug=request.user.userprofile.troop %}" style="text-align: right">
+			Next?</a>
+			{% elif explorer %}
+			<a class="btn btn-outline-danger" href="{% url 'accounts:pioneer_progress' slug=request.user.userprofile.troop %}" style="text-align: left">Back</a>
+			<a class="btn btn-outline-light" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}">Home</a>	
+			<a class="btn btn-outline-success" href="{% url 'accounts:adventurer_progress' slug=request.user.userprofile.troop %}" align= "right">Next</a>
+			{% elif adventurer %}
+			<a class="btn btn-outline-info" href="{% url 'accounts:pioneer_progress' slug=request.user.userprofile.troop %}" style="text-align: left">Back</a>
+			<a class="btn btn-outline-light" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}" style="text-align: right">Home</a>		
+			{% endif %}	
+		</div>
+</div>
+<br><br>
+{% endblock %}

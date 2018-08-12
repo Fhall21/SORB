@@ -1,0 +1,22 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<style type="text/css">
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+  }
+</style>
+<br>
+<h3>Would you like to go back to the home page or tick off another badge?</h3>
+	
+
+<a href="{% url 'leaders:badge_request_quantity'  %}" class="btn btn-success btn-lg btn-block"  role="button" aria-pressed="true"><strong>More badgework</strong></a>
+<a href="{% url 'leaders:home' %}" class="btn btn-success btn-lg btn-block"  role="button" aria-pressed="true" ><strong>Home page</strong></a>
+
+</div>
+<br>
+<br><br>
+
+{% endblock %}
+

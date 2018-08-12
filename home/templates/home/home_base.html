@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block extra_styles %}<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block head %}
+{% block title %}
+<title>Home</title>
+{% endblock %}
+<style type="text/css" media="screen">
+    form article label {
+      display: block;
+      margin: 5px;
+    }
+
+    form .submit {
+      margin: 15px 0;
+    }
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #100;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.register {
+  color: black;
+  text-align: left;
+}
+
+
+  </style>
+}
+{% endblock %}
+<style type="text/css">
+ html{
+    background-color: red;
+  }
+</style>
+{% block body-tag %}{% endblock %}
+
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #262626;">
+      <a class="py-2" href="{% url 'home_page:home' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+        </a>
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="navbar-nav">
+
+
+      	<a class="nav-item nav-link" href="{% url 'login:login' %}">Login</a>
+      	<a class="nav-item nav-link" href="{% url 'home_page:pricing' %}">Pricing</a>
+      <a class="nav-item nav-link" href="{% url 'home_page:contact' %}">Contact Us</a>
+    </div>
+</div>
+    </nav>
+
+{% endblock %}
+
+<div id="body">
+{% block body %}
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+	<div style="background-image: url(https://images.unsplash.com/photo-1499375196881-25dc0ab5a402?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4253bf5e34988f40fb945da60304efa7&auto=format&fit=crop&w=1051&q=80);">
+      <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">Punny headline</h1>
+        <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+        <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+      </div>
+      <div class="product-device box-shadow d-none d-md-block"></div>
+      <div class="product-device product-device-2 box-shadow d-none d-md-block"></div></div>
+    </div>
+
+{% endblock %}
+</div>

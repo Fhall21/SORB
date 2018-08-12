@@ -1,0 +1,112 @@
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtnB" class="btn btn-lg btn-block btn-outline-primary">Sign Up</button>
+
+<!-- The Modal -->
+<div id="myModalB" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+          <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Register. Basic Plan</h5><p id="test"></p>
+          <span class="close" id="closeB">&times;</span>
+      </div>
+       <div class="modal-body">
+        <!-- Error Presentation --->
+        <div class="alert alert-danger" role="alert" id="error_spotB" style="display: none;">
+  {% for message in error_b %}
+  {% for item in message %}
+      {% if forloop.counter == 1 %}
+      <p>The {{ item }} field was incorrectly completed as:<p>
+      {% else %}
+      <ul>
+        {% for i in item %}
+        <li>{{ i }}</li>
+      </ul>
+
+          {% endfor %}
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+
+
+
+
+        </div>
+        We are excited to see you want to join us. Complete the quick details below and you'll shortly be able to get going!
+        <br>
+        <br>
+        <h6><b>Steps to follow:</b></h6>
+        <ol>
+          <li>Complete the details about your troop below,</li>
+          <li>Click <i>Pay with card</i>,</li>
+          <li>Complete the payment details,</li>
+          <li>Once you receive the green tick, wait for your payment to be processed. If everything was entered correctly, you will be sent to another page for confirmation shortly aftwards. Otherwise you will be sent back to this page to try again.</li>
+        </ol>
+        <br>
+        <h6>Troop Details:</h6>
+        <p><i>These will be used to generate your logon details and will not be publically shared.</i></p>
+    <form method="post" id="myFormB" >
+    {% csrf_token %}
+    {{ form_b.as_p }}
+    <hr>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="{{ key }}"
+    data-description="Basic Plan"
+    data-name="SORB"
+    data-amount="1200"
+    data-currency="AUD"
+    data-locale="auto"></script>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+var error = "{{ error }}";
+
+var error_spotB = document.getElementById("error_spotB");
+
+
+// Get the modal
+var modalB = document.getElementById('myModalB');
+
+//Alert the user that there has been errors and then reopen the modal
+window.onload = function(){
+  if (error == "True"){
+    error_spotB.style.display = "block";
+    window.alert("Errors have occured while processing the troop deails. Please try again");
+    modalB.style.display = "block";
+
+    }
+  }
+
+// Get the button that opens the modal
+var btnB = document.getElementById("myBtnB");
+
+// Get the form
+var myFormB = document.getElementById("myFormB");
+
+// Get the <span> element that closes the modal
+var spanB = document.getElementById("closeB");
+
+// When the user clicks on <span> (x), close the modal
+spanB.onclick = function() {
+    modalB.style.display = "none";
+}
+
+// When the user clicks the button, open the modal 
+btnB.onclick = function() {
+    modalB.style.display = "block";
+}
+window.onclick = function(event) {
+    if (event.target == modalB) {
+        modalB.style.display = "none";
+    }
+}
+
+
+</script>

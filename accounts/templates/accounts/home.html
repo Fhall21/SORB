@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Home</title>
+{% endblock %}
+	
+{% block body %}
+
+<div class="text-center">
+	<div class="jumbotron jumbotron-fluid" style="color: white; background-color: #87CEFA">
+		<div class="container">
+		<h1>Welcome {{ request.user.first_name}} </h1>
+		<br>
+		  <div class="card-body">
+		<blockquote class="blockquote mb-0">
+		<h4>"Be Prepared"</h4>
+		<footer class="blockquote-footer"><cite title="Source Title">Baden-Powell</cite></footer>
+	</blockquote>
+</div>
+	</div>
+</div>
+</div>
+<div class="container">
+	<br>
+<h2><strong>Your Progress:</strong></h2><br>
+<h3>
+	<div class="row">
+		<div class ="col">
+			<a href="{% url 'accounts:pioneer_progress' slug=request.user.userprofile.troop %}" style="color:red"><strong>Pioneer</strong></a>
+			<div class="progress">
+				<div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{  pioneer_progress }}%" aria-valuenow="{{ pioneer_progress }}" aria-valuemin="0" aria-valuemax="100">{{ pioneer_progress }}%</div> 
+			</div><br>
+			<div class ="col">
+			<a href="{% url 'accounts:explorer_progress' slug=request.user.userprofile.troop %}" style="color:lightskyblue"><strong>Explorer</strong></a>
+			<div class="progress">
+				<div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{ explorer_progress }}%" aria-valuenow="{{ explorer_progress }}" aria-valuemin="0" aria-valuemax="100">{{ explorer_progress }}%</div> 
+			</div><br>
+			<div class ="col">
+			<a href="{% url 'accounts:adventurer_progress' slug=request.user.userprofile.troop %}" style="color:lightgreen"><strong>Adventurer</strong></a>
+			<div class="progress">
+				<div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{ adventurer_progress }}%" aria-valuenow="{{ adventurer_progress }}" aria-valuemin="0" aria-valuemax="100">{{ adventurer_progress }}%</div> 
+			</div>
+		</div>
+</div></h3>
+<br><br>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock %}
+{% block body-tag %}
+	<body class="text-center">{% endblock %}
+{% block body %}
+
+<div class= "container">    
+
+  <a class="btn btn-lg btn-outline-primary" href="{% url 'home_page:home' %}" style="float: right;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto">
+          <circle cx="12" cy="12" r="10"></circle>
+            <line x1="6" y1="18" x2="18" y2="6"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+	<br>
+  <br>
+      <img class="mb-4" src="https://upload.wikimedia.org/wikipedia/en/thumb/8/87/World_Scout_Emblem_1955.svg/1200px-World_Scout_Emblem_1955.svg.png" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      {% if error %}
+	<div class="alert alert-danger" role ="alert">
+		<strong>Oh no!</strong> It seems like you may have entered your details incorrectly. Try again.
+	</div>
+	{% endif %}
+
+{% if account_error %}
+  <div class="alert alert-danger" role ="alert">
+    <strong>Oh no!</strong> It seems we're having a problem with ylinking you up to your account. Try again and email us if the problem persists.
+  </div>
+  {% endif %}      
+  <form method="post">
+		{% csrf_token %}
+		{% include 'bf_form.html' with form=form %}
+
+     
+      <input class="btn btn-lg btn-outline-primary btn-block" type="submit" value="Log In">
+      <a class="btn btn-lg btn-outline-dark btn-block" href="{% url 'home_page:pricing' %}">Sign Up</a>
+      <a class="btn btn-lg btn-outline-dark btn-block" href="{% url 'login:reset_password' %}">Forgot Password?</a>
+      <p class="mt-5 mb-3 text-muted">©2018</p>
+    </form>
+
+  <br><br></div>
+  {% endblock %}

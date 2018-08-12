@@ -1,0 +1,42 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<style type="text/css">
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+  }
+</style>
+<div class="container">
+	<h2>Tell us, how many new badges have been finished?</h2><br>
+
+	<div class="btn-toolbar" role="toolbar" aria-label="1-4 scouts" >
+		
+	  <div class="btn-group mr-2" role="group" aria-label="First group">
+	    <a class="btn btn-info" id="buttons"  href="{% url 'leaders:specific_badge_request' quantity=1  %}">1</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=2  %}">2</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=3  %}">3</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=4  %}">4</a>
+		</div>
+	{% if PremiumAccess %}
+
+		<div class="btn-group mr-2" role="group" aria-label="Second group">
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=5  %}">5</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=6  %}">6</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=7  %}">7</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=8  %}">8</a>
+		</div>
+
+	    <div class="btn-group" role="group" aria-label="Third group">
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=9  %}">9</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=10  %}">10</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=11  %}">11</a>
+	    <a class="btn btn-info" id="buttons" href="{% url 'leaders:specific_badge_request' quantity=12  %}">12</a>
+	  </div>	
+{% endif %}
+
+</div>
+<br>
+<br><br>
+
+{% endblock %}

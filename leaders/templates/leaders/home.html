@@ -1,0 +1,34 @@
+{% extends 'admin/base_site.html' %}
+
+{% block pagestyling %}
+
+{% endblock %}
+
+{% block content_title %}
+<div class ="container">
+<h1>Welcome!</h1></div>
+{% endblock %}
+
+{% block content %}
+<style type="text/css">
+a:link, a:visited {
+  color: white;
+  text-decoration: none;
+  }
+</style>
+<div class="container">
+
+	<h2>What do you feel like doing today?</h2>
+<!-- changer couleur -->
+	<div>
+	<a href="{% url 'leaders:badge_request_quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Ticking off badgwork?</strong></a>
+	<a href="{% url 'admin:index'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Viewing Scout Progress/Accounts</strong></a>
+	{% if PremiumAccess %}
+	<a href="{% url 'leaders:Report_Quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Print Badge Report</strong></a></div>
+	{% endif %}
+
+</div>
+<br>
+<br><br>
+
+{% endblock %}

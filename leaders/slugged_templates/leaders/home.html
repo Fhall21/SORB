@@ -1,0 +1,21 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content_title %}
+<div class ="container">
+<h1>Welcome!</h1></div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+	<h2>What do you feel like doing today?</h2>
+<!-- changer couleur -->
+	<a href="{% url 'leaders:badge_request_quantity' slug=request.user.userprofile.troop %}" class="btn btn-info btn-lg btn-block"  role="button" aria-pressed="true" style="color: white;"><strong>Ticking off badgwork?</strong></a>
+	<a href="{% url 'admin:index' slug=request.user.userprofile.troop %}" class="btn btn-info btn-lg btn-block"  role="button" aria-pressed="true" style="color: white;"><strong>Viewing Scout Progress/Accounts</strong></a>
+	<a href="{% url 'leaders:Report_Quantity' slug=request.user.userprofile.troop %}" class="btn btn-info btn-lg btn-block"  role="button" aria-pressed="true" style="color: white;"><strong>Print Badge Report</strong></a>
+
+</div>
+<br>
+<br><br>
+
+{% endblock %}

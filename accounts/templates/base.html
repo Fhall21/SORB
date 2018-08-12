@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Bootstrap stuff -->
+		<link rel="stylesheet" 
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
+		integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
+		crossorigin="anonymous">
+		<!-- Responsive meta tag -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block extra_styles %}
+    <style type="text/css">
+      
+      body{
+        color: #87CEFA;
+        background-color: #228B22;
+        ;
+      }
+
+    </style>
+    {% endblock %}
+		{% block head %}
+		<title>Base</title>
+		{% endblock %}
+	</head>
+	{% block body-tag %}<body>{% endblock %}
+
+{% block navbar %}
+
+      {% if request.user.is_authenticated %}
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-success" style="background-color: #006400;">
+      <a class="navbar-brand mr-auto mr-lg-0" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}">Scout Online Record Tracker</a>
+ <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="{% url 'accounts:home' slug=request.user.userprofile.troop %}">Home <span class="sr-only">(current)</span></a>
+
+      	<a class="nav-item nav-link" href="{% url 'accounts:view_profile' slug=request.user.userprofile.troop %}">Profile</a>
+      	<a class="nav-item nav-link" href="{% url 'accounts:logout' slug=request.user.userprofile.troop %}">Logout</a>
+    </div>
+</div>
+    </nav>
+ 
+
+      {% else %}
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<a class="navbar-brand mr-auto mr-lg-0" href="# ">Scout Online Record Tracker</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <div class="navbar-nav">
+<a class="nav-link" href="{% url 'accounts:login' slug=request.user.userprofile.troop %}">Login <span class="sr-only">(current)</span></a>
+</div>
+</div>
+</nav>
+
+      {% endif %}
+
+</div>
+</nav></body>
+{% endblock %}
+<br><br>
+			{% block body %}
+			{% endblock %}
+<!-- {% block footer %}
+<footer class="footer" style="background-color: ghostwhite">
+      <div class="container-fluid">
+        <span class="text-muted">A website for the ease of scouting.</span>
+      </div>
+    </footer>
+    {% endblock %} -->
+
+
+
+				<!-- jQuery first, then Tether, then Bootstrap JS. -->
+				<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+	</body>
+</html>

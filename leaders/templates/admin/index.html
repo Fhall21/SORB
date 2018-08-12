@@ -1,0 +1,111 @@
+{% extends 'admin/index.html' %}
+{% load i18n %}
+{% load i18n static %}
+
+
+
+
+
+<h1>Index</h1>
+<!-- setup stuff -->
+	{% block extrastyle %}
+	<!-- Bootstrap stuff -->
+			<link rel="stylesheet" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
+			integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
+			crossorigin="anonymous">
+			<!-- Responsive meta tag -->
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			{{ block.super }}<link rel="stylesheet" type="text/css" href='{% static "admin/css/dashboard.css" %}'>
+			{% block pagestyling %}
+
+<style type="text/css">
+
+#addB, #viewB, #changeB{
+	text-align: right;
+}
+#addB, #viewB{
+	padding-right: 5vw;
+}
+
+#changeB{
+	width: 88px;
+}
+
+</style>
+			{% endblock %}
+	{% endblock %}
+
+	{% block bodyclass %}
+<!--	"style="background-color: white; -->
+	{% endblock %}
+
+{% block branding %}
+<h1>{{ request.user.userprofile.troop }} Leader's Admin</h1>
+{% endblock %}
+
+<!-- title -->
+{% block title %}{{ request.user.userprofile.troop }} Admin {% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'leaders:home'  %}">Home</a>  | 
+<a href="{% url 'leaders:badge_request_quantity'  %}">Badgework</a> |  
+<a href="{% url 'admin:index'  %}">Scout Progress</a>  |  
+{% if user.has_usable_password %}
+<a href="{% url 'admin:password_change'  %}">Change Password</a> /
+ {% endif %}
+<a href="{% url 'admin:logout'  %}">Logout</a>
+</div>
+  {% endblock %}
+
+{% block userlinks %}
+
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+{% if app_list %}
+    {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module">
+        <table style="width: 100%;">
+        <caption>
+            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
+        </caption>
+        {% for model in app.models %}
+            <tr class="model-{{ model.object_name|lower }}">
+            {% if model.admin_url %}
+                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+            {% else %}
+                <th scope="row">{{ model.name }}</th>
+            {% endif %}
+
+            {% if model.add_url %}
+            	
+                <td id="addB" style=""><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
+            {% else %}
+           
+                <td>&nbsp;</td>
+            {% endif %}
+
+            {% if model.admin_url %}
+                {% if model.view_only %}
+                <td id="viewB"><div id="realignR"><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></div></td>
+                {% else %}
+                <td id=changeB><div id="realignR"><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></div></td>
+                {% endif %}
+            {% else %}
+                <td><div id="realignR">&nbsp;</div></td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>{% trans "You don't have permission to view or edit anything." %}</p>
+{% endif %}
+</div>
+{% endblock %}
+

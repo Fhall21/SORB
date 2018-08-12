@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Pioneer Badge</title>
+<!-- <link rel="stylesheet" href="css/pioneer.css"> -->
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h1 style= "color: red;">Pioneer</h1>
+	<h3>What is it?</h3>
+	<p>During your journey through scouting you will discover there are 3 main sections and goals you need to aim for. The first being the Pioneer Badge. The pioneer target Badges are design to be get you to experience what scouting is all about; going new places,  doing practical and adventurous activities as well as teaching you the vital scouting skills.</p> 
+<br>
+	
+	<h3>Requirements</h3>
+	<ul>
+		<li><a href="#">Campcraft</a></li>
+		<li><a href="#">Citizenship</a></li>
+	</ul>
+	<p>The completion of at least 1 of the following:</p>
+	<ul>
+		<li><a href="#">Air Activities</a></li>
+		<li><a href="#">Construction</a></li>
+		<li><a href="#">Environment</a></li>
+		<li><a href="#">Water Activities</a></li>
+		<li><a href="#">Water Safety</a></li>
+	</ul>
+	<h4>Completing the above gets you the pioneer badge</h4>
+	<h3>If you wish to earn the red chord, you need:</h3>
+	<ul>
+		<li><a href="#">Patrol Activity</a></li>
+		<li><a href="#dff">2 Profiency Badges</a></li>
+	</ul>
+
+
+	<h3>Red cord: {{ user.userprofile.red_cord }}</h3>
+	<br>
+	<a class="btn btn-outline-secondary" href="{% url 'accounts:view_profile' slug=slug_arg %}" role="button">Back</a>
+</div>
+<br>
+<br>
+{% endblock %}

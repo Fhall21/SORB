@@ -1,0 +1,40 @@
+{% extends 'admin/index.html' %}
+<!-- setup stuff -->
+	{% block extrastyle %}
+	<!-- Bootstrap stuff -->
+			<link rel="stylesheet" 
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" 
+			integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" 
+			crossorigin="anonymous">
+			<!-- Responsive meta tag -->
+			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	{% endblock %}
+
+	{% block bodyclass %}
+<!--	"style="background-color: white; -->
+	{% endblock %}
+
+{% block branding %}
+<h1>Scout Leader's Admin</h1>
+{% endblock %}
+
+<!-- title -->
+{% block title %} BCC Admin {% endblock %}
+
+{% block userlinks %}
+<a href="{% url 'leaders:home' slug=request.user.userprofile.troop %}">Home</a>
+
+
+
+{% endblock %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'leaders:home' slug=request.user.userprofile.troop %}">Home</a>  | 
+<a href="{% url 'leaders:badge_request_quantity' slug=request.user.userprofile.troop %}">Badgework</a> |  
+<a href="{% url 'admin:index' slug=request.user.userprofile.troop %}">Scoutprogress</a>  |  
+{% if user.has_usable_password %}
+<a href="{% url 'admin:password_change' slug=request.user.userprofile.troop %}">Change Password</a> /
+ {% endif %}
+<a href="{% url 'admin:logout' slug=request.user.userprofile.troop %}">Logout</a>
+</div>
+  {% endblock %}
