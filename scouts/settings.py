@@ -29,8 +29,8 @@ ALLOWED_HOSTS = []
 
 STRIPE_LIVE_PUBLIC_KEY = ''
 STRIPE_LIVE_SECRET_KEY = ''
-STRIPE_TEST_PUBLIC_KEY ='pk_test_HgBO3F1H2pQWJko5u58C0I15'
-STRIPE_TEST_SECRET_KEY = 'sk_test_2U9vLWdHhfiIsNI6UCewnOaP'
+STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_TEST_PUBLIC_KEY')
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
 STRIPE_LIVE_MODE = False
 
 
@@ -207,9 +207,8 @@ SCOUT_AUTHORIZED_URLS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'felix.p.hall@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'felix.p.hall@gmail.com'
-EMAIL_HOST_PASSWORD = 'Merlin3710+'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
