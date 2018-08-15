@@ -223,6 +223,5 @@ class Adventurer(TemplateView):
 		'proficiency_badge_list': proficiency_badge_list, 
 		'badge_progress_list':badge_progress_list}
 		return render(request, self.template_name, args)
-		return render(request, self.template_name, args)
 
 

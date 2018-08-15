@@ -29,6 +29,12 @@ class RegistrationForm(UserCreationForm):
 
 class EditProfileForm(UserChangeForm):
 
+	def __init__(self, *args, **kwargs):
+		super(EditProfileForm, self).__init__(*args, **kwargs)
+		self.fields['first_name'].required = True
+		self.fields['last_name'].required = True
+		self.fields['email'].required = True
+
 	class Meta:
 		model = User
 		fields = (

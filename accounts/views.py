@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from accounts.forms import EditProfileForm
 
-from accounts.badge_views import Percentager
+from accounts.badge_views import Percentager, DataListRequest
 
 from django.urls import reverse
 
@@ -23,15 +23,40 @@ def home(request, **kwargs):
 #	slug_name = get_object_or_404(queryset, slug=slug)
 #	print (slug_name)
 	slug = request.user.userprofile.troop
+	pioneer_empty = False
+	explorer_empty = False
+	adventurer_empty = False
 
 	#displays the percentage progress in each section
 	pioneer_progress = Percentager.Pioneer(request)
 	explorer_progress = Percentager.Explorer(request)
 	adventurer_progress = Percentager.Adventurer(request)
+
+	#get the badges for each section
+	pioneer_badges = DataListRequest.Pioneer(request)
+	explorer_badges = DataListRequest.Explorer(request)
+	adventurer_badges = DataListRequest.Adventurer(request)
+
+	#if it was actually empty
+	if len(pioneer_badges) == 0:
+		pioneer_empty = True
+	elif len(explorer_badges) == 0:
+		explorer_empty = True
+	elif (adventurer_badges) == 0:
+		adventurer_empty = True
+
 	
-	args = {'slug_arg': slug, 'user': request.user, 'pioneer_progress': pioneer_progress, 
+	args = {'slug_arg': slug, 'user': request.user, 
+	'pioneer_progress': pioneer_progress, 
 	'explorer_progress':explorer_progress, 
-	'adventurer_progress':adventurer_progress}
+	'adventurer_progress':adventurer_progress,
+	'pioneer_badges': pioneer_badges,
+	'explorer_badges': explorer_badges,
+	'adventurer_badges':adventurer_badges,
+	'pioneer_empty': pioneer_empty,
+	'explorer_empty': explorer_empty,
+	'adventurer_empty': adventurer_empty,
+	}
 	return render(request, 'accounts/home.html', args)
 
 
