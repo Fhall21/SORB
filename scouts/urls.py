@@ -28,7 +28,7 @@ path('account/', include('accounts.urls', namespace='accounts'))
 
 
 urlpatterns = [
-    path('grappelli/', include('grappelli.urls')), # grappelli URLS
+#    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('leaders/scout_info/', admin.site.urls),
     path('leaders/', include('leaders.urls', namespace='leaders')),
 
