@@ -1,1 +1,1 @@
-web: gunicorn scouts.wsgi
+web: gunicorn scouts.wsgi --preload --workers 1
