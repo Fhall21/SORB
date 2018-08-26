@@ -6,6 +6,7 @@ pip-selfcheck.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+local_settings.py
 *.py[cod]
 *$py.class
 
@@ -103,3 +104,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+*.pyc
+db.sqlite3
