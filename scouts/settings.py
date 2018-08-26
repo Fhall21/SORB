@@ -26,7 +26,7 @@ os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1']
+ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1', 'sorb.herokuapp.com']
 
 STRIPE_LIVE_PUBLIC_KEY = ''
 STRIPE_LIVE_SECRET_KEY = ''
