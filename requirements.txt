@@ -22,7 +22,6 @@ django-heroku==0.3.1
 django-paypal==0.5.0
 django-request-provider==1.0.2
 django-widget-tweaks==1.4.2
-dj_database_url==0.2.1
 docutils==0.14
 entrypoints==0.2.3
 et-xmlfile==1.0.1
