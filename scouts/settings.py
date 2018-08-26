@@ -127,7 +127,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '',
     }
-
+}
 DATABASES['default'] = dj_database_url.config()
 
 # Password validation
