@@ -28,10 +28,12 @@ DEBUG = False
 
 ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1', 'sorb.herokuapp.com']
 
+#stripe
 STRIPE_LIVE_PUBLIC_KEY = ''
 STRIPE_LIVE_SECRET_KEY = ''
-STRIPE_TEST_PUBLIC_KEY = os.environ.get('STRIPE_TEST_PUBLIC_KEY')
-STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
+STRIPE_TEST_PUBLIC_KEY ='pk_test_HgBO3F1H2pQWJko5u58C0I15'
+STRIPE_TEST_SECRET_KEY = 'sk_test_2U9vLWdHhfiIsNI6UCewnOaP'
+
 STRIPE_LIVE_MODE = False
 
 
@@ -120,7 +122,7 @@ WSGI_APPLICATION = 'scouts.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'scouts',
         'USER': 'fhall21',
         'PASSWORD': '',
@@ -128,7 +130,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-DATABASES['default'] = dj_database_url.config()
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
