@@ -122,12 +122,12 @@ WSGI_APPLICATION = 'scouts.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'scouts',
-        'USER': 'fhall21',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sorb',
+        'USER': 'postgres',
+        'PASSWORD': 'Merlin99',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 
@@ -245,7 +245,7 @@ SECURE_FRAME_DENY               = False
 #more deployment stuff
 # add this
 import dj_database_url
-db_from_env = dj_database_url.config()
+db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/postgres')
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
 # Activate Django-Heroku.
