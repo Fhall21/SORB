@@ -245,7 +245,7 @@ SECURE_FRAME_DENY               = False
 #more deployment stuff
 # add this
 import dj_database_url
-db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/postgres')
+db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/sorb')
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
 # Activate Django-Heroku.
