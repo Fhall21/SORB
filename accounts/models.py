@@ -56,6 +56,7 @@ class UserProfileAdminManager(models.AdminManager):
 class UserProfile(models.Model):
 
 	list_format_group = [(None, 'Click here to select the group')]
+	'''
 	data_set = GroupRecord.objects.all()
 	for i in data_set:
 		group_name = i.group
@@ -68,8 +69,8 @@ class UserProfile(models.Model):
 #		group_name = i.group
 #		group_abbr = i.abbreviation
 #		list_format_group.append(list_maker(group_abbr, group_name))
-#	tuple_format_group = tuple(list_format_group)
-
+'''
+	tuple_format_group = tuple(list_format_group)
 	scout_username = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
 	Group_Choice = tuple_format_group
 	role_choice = (
@@ -91,7 +92,7 @@ class UserProfile(models.Model):
 
 		Premium_group = Group.objects.get(name="Premium")
 		Basic_group = Group.objects.get(name="Basic")
-
+'''
 		CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
 
 		user = self.scout_username
@@ -109,7 +110,7 @@ class UserProfile(models.Model):
 		else:
 			pass
 		super(UserProfile, self).save(*args, **kwargs)
-
+'''
 def create_user_profile(sender, instance, created, **kwargs): 
 	if created:
 		print ('instance is: {}'.format(instance))

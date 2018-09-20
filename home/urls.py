@@ -18,7 +18,7 @@ app_name='home_page'
 urlpatterns = [
 	path('', WelcomeView.as_view(), name='home'),
 	path('pricing/', PricingView.as_view(), name='pricing'),
-	path('pricing/payment', include('djstripe.urls', namespace="djstripe")),
+#	path('pricing/payment', include('djstripe.urls', namespace="djstripe")),
 
 
 #	path('pricing/checkout', CheckOutView.as_view(), name='checkout'),
