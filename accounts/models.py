@@ -86,15 +86,13 @@ class UserProfile(models.Model):
 	def __str__(self):
 		return '%s'% (self.scout_username)
 
-		'''
+		
 	def save(self, *args, **kwargs):
 		Leader_group = Group.objects.get(name="Leader")
 		Scout_group = Group.objects.get(name="Scouts")
 
 		Premium_group = Group.objects.get(name="Premium")
 		Basic_group = Group.objects.get(name="Basic")
-'''
-'''
 		CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
 
 		user = self.scout_username
@@ -112,7 +110,7 @@ class UserProfile(models.Model):
 		else:
 			pass
 		super(UserProfile, self).save(*args, **kwargs)
-'''
+
 def create_user_profile(sender, instance, created, **kwargs): 
 	if created:
 		print ('instance is: {}'.format(instance))
