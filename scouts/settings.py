@@ -213,8 +213,8 @@ SCOUT_AUTHORIZED_URLS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'felix.p.hall@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'sorb.felix@gmail.com'
+EMAIL_HOST_PASSWORD = 'sorb2018'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
