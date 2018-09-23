@@ -25,7 +25,6 @@ class SpecificBadgeRequestView_1(TemplateView):
 #		return kwargs
 
 	def get(self, request, quantity):
-
 		done = False
 		error = False
 		user = request.user
@@ -33,7 +32,7 @@ class SpecificBadgeRequestView_1(TemplateView):
 #		user_form_setting = BadgeForm.set_user(self, user)
 #		form_kwargs = SpecificBadgeRequestView_1.get_form_kwargs(self, request)
 #		BadgeForm.get_user(self, user=user)
-		BadgeFormsSet = formset_factory(BadgeForm)
+		BadgeFormsSet = formset_factory(BadgeForm, extra=quantity)
 		formset = BadgeFormsSet(form_kwargs={'user': request.user})
 		data = ScoutData.objects.all()
 		form_dict = []
@@ -41,7 +40,7 @@ class SpecificBadgeRequestView_1(TemplateView):
 
 		for i in range(1, quantity+1):
 			form_dict.append(i)
-
+		
 		args = {'formset': formset, 'data': data,
 		'form_dict': form_dict, 'done':done, 'error': error,
 		}
