@@ -169,10 +169,10 @@ USE_TZ = True
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    'leaders/static'
-    ]
+
 STATIC_ROOT = os.path.join(BASE_DIR,'‘staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'scouts/media')
