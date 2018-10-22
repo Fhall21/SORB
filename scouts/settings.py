@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1', 'sorb.herokuapp.com']
 
@@ -169,10 +169,10 @@ USE_TZ = True
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    'leaders/static'
-    ]
+
 STATIC_ROOT = os.path.join(BASE_DIR,'‘staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'scouts/media')
@@ -213,8 +213,8 @@ SCOUT_AUTHORIZED_URLS = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'felix.p.hall@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'sorb.felix@gmail.com'
+EMAIL_HOST_PASSWORD = 'sorb2018'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 
