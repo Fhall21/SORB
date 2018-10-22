@@ -257,7 +257,7 @@ class PricingView(TemplateView):
 
 			form_used = 'B'
 			valid_form = True
-			amount = 1200
+			amount = 0000
 			plan = stripe.Plan.retrieve("plan_DLIn5NDMMMdMHj")
 
 			request.session['Troop_id'] = form_info_b.cleaned_data['Test_BTroop_id']
@@ -282,7 +282,7 @@ class PricingView(TemplateView):
 			print('Form A:')
 			print (request.session.get('Troop_id', 'Nothing sorry'))			
 
-		if valid_form:
+#			to fix up later
 			timestamp = (int(time.time()) + 120) 
 
 			contact_email = request.POST['stripeEmail']
@@ -309,6 +309,7 @@ class PricingView(TemplateView):
 				trial_period_days = 30,
 
 				)
+		if valid_form:
 
 			r_amount = float((str(amount))[:-2] + "." + (str(amount)[-2:]))
 			new_leader = None

@@ -19,9 +19,11 @@
           </div>
           <div class="card-body">
           	<div style="color: white;">
-            <h1 class="card-title pricing-card-title">$12<small>/mo </small></h1>
+            <h1 class="card-title pricing-card-title">$10<small>/mo </small></h1>
+            <!--
             <h2 class="card-title pricing-card-title ">OR</h2>
             <h1 class="card-title pricing-card-title">$120<small >/yr</small></h1> 
+          -->
             </div>           
             <ul class="list-unstyled mt-3 mb-4">
 			  <li>3 badge sumbitions per request</li><br>
@@ -51,7 +53,7 @@ bottom: 2vh;">
           <span class="close" id="closeB">&times;</span>
       </div>
        <div class="modal-body">
-                <!-- Error Presentation --->
+                <!-- Error Presentation -->
         <div class="alert alert-danger" role="alert" id="error_spotB" style="display: none;">
   {% for message in Berror %}
   {% for item in message %}
@@ -90,13 +92,16 @@ For privacy reasons, all fields have been cleared.
     {% csrf_token %}
     {% include 'bf_form.html' with form=formB %}
     <hr>
+    <button type="submit" class="btn btn-primary">Start now!</button>
+    <!--
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="{{ key }}"
     data-description="Basic Plan"
     data-name="SORB"
-    data-amount="1200"
+    data-amount="0000"
     data-currency="AUD"
     data-locale="auto"></script>
+  -->
       </form>
 
     </div>
@@ -113,9 +118,11 @@ For privacy reasons, all fields have been cleared.
           </div>
           <div class="card-body">
           	<div style="color: white;">
-            <h1 class="card-title pricing-card-title">$16<small >/mo </small></h1>
+            <h1 class="card-title pricing-card-title">$10<small >/mo </small></h1>
+            <!--
             <h2 class="card-title pricing-card-title ">OR</h2>
             <h1 class="card-title pricing-card-title">$160<small >/yr</small></h1>
+          -->
         </div>
             <ul class="list-unstyled mt-3 mb-4">
               <li>12 badge sumbitions per request</li><br>
@@ -187,7 +194,7 @@ bottom: 2vh;">
         data-key="{{ key }}"
         data-description="Premium Plan"
         data-name="SORB"
-        data-amount="1600"
+        data-amount="1000"
         data-currency="AUD"
         data-locale="auto"></script>
     </form> </div>
