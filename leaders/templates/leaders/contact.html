@@ -1,0 +1,29 @@
+{% extends 'admin/base_site.html' %}
+
+{% block pagestyling %}
+
+{% endblock %}
+
+{% block content_title %}
+<div class ="container">
+{% endblock %}
+
+{% block content %}
+{% if success %}
+<div class="alert alert-success" role="alert">
+  <strong>Success!</strong> Do you want to head back to the<a href="{% url 'leaders:home' %}" class="alert-link"> Home Page.</a>
+</div>
+{% endif %}
+<div class="container">
+<h2>Contact your troop:</h2>
+<div class ="form-group">
+<form role="form" method="post">
+    {% csrf_token %}
+        {% include 'bf_form.html' with form=form %}
+ <button type="submit" class="btn btn-primary">Send now!</button></form></div>
+    </br>
+</div>
+<br>
+<br><br>
+
+{% endblock %}

@@ -17,7 +17,8 @@ from leaders.views import (
 
 	Badge_Report,
 	Report_Quantity,
-	testView,
+	TestView,
+	ContactView,
 
 
 )
@@ -36,8 +37,10 @@ urlpatterns = [
 
 	path('badge_request_quantity/success', SubmitedView.as_view(), name="redirect"),
 
-	path('test', testView.as_view(), name="test"),
+	path('test', TestView.as_view(), name="test"),
 	path('badge_report_<int:month>', Badge_Report.as_view(), name="badge_report"),
 	path('badge_report_quantity', Report_Quantity.as_view(), name="Report_Quantity"),
+
+		path('contact', ContactView.as_view(), name="contact"),
 
 ] + staticfiles_urlpatterns()

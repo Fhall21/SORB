@@ -22,9 +22,11 @@ a:link, a:visited {
 <!-- changer couleur -->
 	<div>
 	<a href="{% url 'leaders:badge_request_quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Ticking off badgwork?</strong></a>
-	<a href="{% url 'admin:index'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Viewing Scout Progress/Accounts</strong></a>
+	<a href="{% url 'admin:index'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Viewing scout progress/accounts</strong></a>
 	{% if PremiumAccess %}
-	<a href="{% url 'leaders:Report_Quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Print Badge Report</strong></a></div>
+	<a href="{% url 'leaders:Report_Quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Printing badge report</strong></a>
+	<a href="{% url 'leaders:contact'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Contacting troop</strong></a>
+</div>
 	{% endif %}
 
 </div>

@@ -12,6 +12,39 @@ from accounts.models import UserProfileManager, UserProfile
 	#	]
 
 
+# Create your models here.
+class EmailForm(forms.Form):
+
+
+#	email = forms.EmailField(required=True,
+#		label='Email:',
+#		error_messages={'required': 'It helps to have your email'},		
+#)
+
+	GroupChoices = (
+		('Scouts', 'Scouts',),
+		('Leader', 'Leaders',),
+		('All', 'All',)
+		)
+	group = forms.ChoiceField(
+		required=True,
+		#widget=forms.RadioSelect,
+		choices=GroupChoices,
+		)
+
+	subject = forms.CharField(required=True, 
+		label='Subject:',
+		error_messages={'required': 'Please select subject'},
+		)
+
+	message = forms.CharField(required=True, 
+		label='Message:', 
+		widget=forms.Textarea,
+		max_length='500',
+		min_length='10',
+		error_messages={'required': "What do you wanna say?"},		
+
+		)
 class BadgeForm(forms.ModelForm):
 
 #	def get_user(self, user):

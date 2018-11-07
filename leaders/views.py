@@ -7,11 +7,12 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import user_passes_test
 
 from login.groups import Groups
+from django.core.mail import EmailMessage, send_mail
 
-from leaders.forms import BadgeForm
+from leaders.forms import BadgeForm, EmailForm
 from leaders.models import ScoutData
 from django.contrib.auth.models import User
-from accounts.models import UserProfile, GroupRecord
+from accounts.models import UserProfile, UserProfileManager, GroupRecord, UserManager
 
 from leaders.badge_report import Badge_Reporter
 
@@ -38,6 +39,15 @@ def Premium_access(request):
 	else:
 		premium_access = False
 	return premium_access
+
+#gets all user based on their groups (scout or leader)
+def email_groups(group, user_list):
+	query_list = []
+	for user in user_list:
+		if user.groups.filter(name__in=[group]):
+			query_list.append(user)
+	return query_list
+
 
 # Create your views here
 @method_decorator(user_passes_test(leader_check), name='get')
@@ -100,13 +110,88 @@ class SubmitedView(TemplateView):
 		args = {}
 		return render(request, self.template_name, args)
 
-class testView(TemplateView):
-	template_name = 'leaders/test.html'
+class ContactView(TemplateView):
+	template_name = 'leaders/contact.html'
 	def get(self, request):
-		results = Groups.Groups_finder
 
-		args = {'list': results}
+
+		form = EmailForm()
+
+		args = {'form': form}
 		return render(request, self.template_name, args)
+
+	def post(self, request):
+		#getting all email addreses
+		#getting all users
+
+		#getting form info
+		form = EmailForm()		
+		args = {'form': form}
+
+		form_info = EmailForm(request.POST)
+		if form_info.is_valid():
+			subject = request.POST.get('subject', '')
+			message = request.POST.get('message', '')
+			_group = request.POST.get('group', '')
+
+			#To whom are we sending, scouts, leader? Everyone??
+			#get all members from troop
+			results = User.objects.filter(userprofile__troop=request.user.userprofile.troop)
+			
+			every_user_list = []
+			for user in results:
+				every_user_list.append(user)
+
+			#filtering bsaed on group
+			if _group == 'Leader' or _group == 'Scouts':
+				refined_user_list = email_groups(_group, every_user_list)
+			else:
+				refined_user_list = every_user_list
+			#getting emails
+			email_list = []
+			for user in refined_user_list:
+				email_list.append(user.email)
+			#other email stuff
+			first_name = request.user.first_name
+			last_name = request.user.last_name
+			from_email = request.user.email
+
+			# email the profile with contact info
+			
+#			template = get_template('contact_template.txt')
+#			context = {
+#			'first_name': first_name,
+#			'last_name': last_name,
+#			'email': email,
+#			'subject': subject,
+#			'message': message,
+#			}
+#			content = template.render(context)
+#			email = EmailMessage(
+#				"New contact form submission",
+#				content,
+#				subject +'',
+#				['youremail@gmail.com'],
+#				headers = {'Reply-To': email }
+#			)
+#			email.send()
+			msg = '{}\nFrom\n{} {}'.format(message, first_name, last_name)
+			email = EmailMessage (
+				subject=subject,
+				body=msg,
+				from_email='email.service@sorb.com.au',
+				to=email_list,
+				reply_to=list(from_email),
+				headers={'Content-Type': 'text/plain'})
+			email.send()
+			#send_mail(subject, msg, from_email, email_list, fail_silently=False,) 
+
+			args.update({'success':True})
+		return render(request, self.template_name, args)
+			
+			#try send_mail if it does not work
+
+
 
 
 '''
@@ -123,3 +208,11 @@ class testView(TemplateView):
 			list_format_group.append(list_maker(group_abbr, group_name))
 		tuple_format_group = tuple(list_format_group)
 '''
+
+
+class TestView(TemplateView):
+	template_name = 'leaders/test.html'
+	def get(self, request):
+		data = 'Replace me!'
+		args = {'data': data}
+		return render(request, self.template_name, args)

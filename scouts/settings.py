@@ -13,18 +13,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import django_heroku, dj_database_url
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1', 'sorb.herokuapp.com']
 
@@ -35,6 +28,51 @@ STRIPE_TEST_PUBLIC_KEY ='pk_test_HgBO3F1H2pQWJko5u58C0I15'
 STRIPE_TEST_SECRET_KEY = 'sk_test_2U9vLWdHhfiIsNI6UCewnOaP'
 
 STRIPE_LIVE_MODE = False
+
+
+#Seperating Production code with development code
+if DEBUG:
+    #Dev code:
+    SECRET_KEY = "45112bk_q#pm4+sy@65s7dtqs5%7u54!++-u+kzggg*c@22dmb"
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+else:
+    # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+    # Quick-start development settings - unsuitable for production
+    # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
+
+    # Database
+    # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'sorb',
+            'USER': 'postgres',
+            'PASSWORD': 'Merlin99',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
+    #more deployment stuff
+    # add this
+    import dj_database_url
+    db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/sorb')
+    DATABASES['default'].update(db_from_env)
+    DATABASES['default']['CONN_MAX_AGE'] = 500
+
 
 
 DJSTRIPE_PLANS = {
@@ -118,18 +156,7 @@ TEMPLATE_LOADERS = [
 WSGI_APPLICATION = 'scouts.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sorb',
-        'USER': 'postgres',
-        'PASSWORD': 'Merlin99',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -170,7 +197,7 @@ AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'‘staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -212,11 +239,13 @@ SCOUT_AUTHORIZED_URLS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sorb.felix@gmail.com'
-EMAIL_HOST_PASSWORD = 'sorb2018'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'email.service@sorb.com.au'
+EMAIL_HOST_PASSWORD = 'Sorb2018!'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+
 
 '''
 deployed?
@@ -242,12 +271,8 @@ SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
 '''
-
-#more deployment stuff
-# add this
-import dj_database_url
-db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/sorb')
-DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE'] = 500
+if not(DEBUG):
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+    django_heroku.settings(locals())
+
+

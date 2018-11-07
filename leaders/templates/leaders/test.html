@@ -1,4 +1,4 @@
-{% extends 'admin/accounts/base_site.html' %}
+{% extends 'admin/base_site.html' %}
 
 {% block pagestyling %}
 
@@ -10,10 +10,12 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
 
-	<h2>Results from badge records:</h2>
-	<h3>{{ list }}</h3>
+	<h2>Results from query:</h2>
+	{{ data }}
+
 </div>
 <br>
 <br><br>

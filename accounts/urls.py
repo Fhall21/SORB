@@ -1,9 +1,6 @@
 from django.urls import path, re_path
 from . import views
-from django.contrib.auth.views import (
-	login, logout, password_reset, password_reset_done, password_reset_confirm, 
-	password_reset_complete
-	)
+
 from accounts.badge_views import Pioneer, Explorer, Adventurer
 
 
@@ -13,7 +10,6 @@ app_name="accounts"
 urlpatterns = [
 	path('', views.home, name="home"), 
 	#account authenticating
-	path('login/', login, name='login'),
  	path('logout/', views.logout_view, {'template_name': 'accounts/logout.html'}, name='logout'),
 	#profile details
 	path('profile/', views.view_profile, name='view_profile'),

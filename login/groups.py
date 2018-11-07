@@ -16,7 +16,7 @@ class Groups:
 		return scout_group_list
 
 	def Groups_finder():
-		list_format_group = [(None, 'Click hereto select the group')]
+		list_format_group = [(None, 'Click here to select the group')]
 		data_set = GroupRecord.objects.all()
 		for i in data_set:
 			group_name = i.group
