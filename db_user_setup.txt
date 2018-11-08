@@ -11,6 +11,9 @@ If you are getting the ProgrammingError and the error is including GroupRecords:
 
 
 From hereon the database is setup, but no users are present. To start and create teh superuser follow these steps:
+-> create super user now or later using:
+--> python manage.py createsuperuser
+--> or create it later as per create_superuser command below
 -> run python manage.py shell and execute
 from django.contrib.auth.models import User, Group
 from accounts.models import UserProfileManager, UserProfile
