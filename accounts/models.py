@@ -62,12 +62,12 @@ class UserProfile(models.Model):
 		group_abbr = i.abbreviation
 		list_format_group.append(list_maker(group_abbr, group_name))
 	tuple_format_group = tuple(list_format_group)
-#	list_format_group = []
-#	data_set = GroupRecord.objects.all()
-#	for i in data_set:
-#		group_name = i.group
-#		group_abbr = i.abbreviation
-#		list_format_group.append(list_maker(group_abbr, group_name))
+	list_format_group = []
+	data_set = GroupRecord.objects.all()
+	for i in data_set:
+		group_name = i.group
+		group_abbr = i.abbreviation
+		list_format_group.append(list_maker(group_abbr, group_name))
 	tuple_format_group = tuple(list_format_group)
 	scout_username = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
 	Group_Choice = tuple_format_group
@@ -86,28 +86,29 @@ class UserProfile(models.Model):
 
 		
 	def save(self, *args, **kwargs):
-		Leader_group = Group.objects.get(name="Leader")
-		Scout_group = Group.objects.get(name="Scouts")
+		
+			Leader_group = Group.objects.get(name="Leader")
+			Scout_group = Group.objects.get(name="Scouts")
 
-		Premium_group = Group.objects.get(name="Premium")
-		Basic_group = Group.objects.get(name="Basic")
-		CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
+			Premium_group = Group.objects.get(name="Premium")
+			Basic_group = Group.objects.get(name="Basic")
+			CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
 
-		user = self.scout_username
-		user.groups.clear()
-		if self.role == 'Leader':
-			Leader_group.user_set.add(user)
-		elif self.role == 'Scout':
-			Scout_group.user_set.add(user)
-		else:
-			pass
-		if (CurrentTroopData.filter(subscription="Premium").exists()):
-			Premium_group.user_set.add(user)
-		elif (CurrentTroopData.filter(subscription="Basic").exists()):
-			Basic_group.user_set.add(user)
-		else:
-			pass
-		super(UserProfile, self).save(*args, **kwargs)
+			user = self.scout_username
+			user.groups.clear()
+			if self.role == 'Leader':
+				Leader_group.user_set.add(user)
+			elif self.role == 'Scout':
+				Scout_group.user_set.add(user)
+			else:
+				pass
+			if (CurrentTroopData.filter(subscription="Premium").exists()):
+				Premium_group.user_set.add(user)
+			elif (CurrentTroopData.filter(subscription="Basic").exists()):
+				Basic_group.user_set.add(user)
+			else:
+				pass
+			super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 
 	if created:

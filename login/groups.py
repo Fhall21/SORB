@@ -25,7 +25,7 @@ class Groups:
 		tuple_format_group = tuple(list_format_group)
 		return tuple_format_group
 # To-Do: Link this with a file which automatically updates based on incoming emails
-'''
+
 def list_maker(abbr, name):
 	list_group = (str(abbr), str(name))
 	return list_group
@@ -38,4 +38,3 @@ def Scout_Group():
 		group_abbr = i.abbreviation
 		list_format_group.append(list_maker(group_abbr, group_name))
 	tuple_format_group = tuple(list_format_group)
-'''

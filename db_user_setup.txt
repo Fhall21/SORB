@@ -1,0 +1,34 @@
+This is a text file explaining teh set-up process required for setting up the postgres database.
+
+If you are getting the ProgrammingError and the error is including GroupRecords:
+-> comment out all reference to GroupRecord (make it non-existent), useful to add reference keyword such as 'fix' 
+-> call python manage.py makemigrations
+-> call python manage.py migrate
+->If all goes well:
+-->uncomment comments added before
+--> call python manage.py makemigrations
+--> call python manage.py migrate
+
+
+From hereon the database is setup, but no users are present. To start and create teh superuser follow these steps:
+-> run python manage.py shell and execute
+from django.contrib.auth.models import User, Group
+from accounts.models import UserProfileManager, UserProfile
+from login.groups import Groups
+
+
+gP = Group.objects.create(name='Premium')
+gP.save()
+
+gB = Group.objects.create(name='Basic')
+gB.save()
+
+->repeat for Leader and Scouts
+
+User.objects.create_superuser('fhall21', 'felix.p.hall@gmail.com', 'admin')
+fh = User.objects.filter(username='fhall21')
+for user in fh:
+	fhall21 = user
+
+up = UserProfile.objects.create(scout_username=fhall21, troop='Admin', role='Leader')
+up.save()

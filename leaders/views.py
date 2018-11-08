@@ -12,7 +12,7 @@ from django.core.mail import EmailMessage, send_mail
 from leaders.forms import BadgeForm, EmailForm
 from leaders.models import ScoutData
 from django.contrib.auth.models import User
-from accounts.models import UserProfile, UserProfileManager, GroupRecord, UserManager
+from accounts.models import UserProfile, UserProfileManager, UserManager, GroupRecord
 
 from leaders.badge_report import Badge_Reporter
 
