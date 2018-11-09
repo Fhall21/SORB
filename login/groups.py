@@ -1,5 +1,5 @@
 
-from accounts.models import GroupRecord fix
+from accounts.models import GroupRecord
 # a list of the possible groups they can choose from 
 def list_maker(abbr, name):
 	list_group = (str(abbr), str(name))
