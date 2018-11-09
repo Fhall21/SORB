@@ -9,7 +9,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from home.models import ContactForm, Payments
-from accounts.models import UserProfile, GroupRecord 
+from accounts.models import UserProfile
+#GroupRecord fix 
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import get_template
 from scouts import settings
