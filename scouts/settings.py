@@ -19,7 +19,7 @@ import django_heroku, dj_database_url
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com', '127.0.0.1', 'sorb.herokuapp.com']
+ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com.au', '127.0.0.1', 'sorb.herokuapp.com']
 
 #stripe
 STRIPE_LIVE_PUBLIC_KEY = ''
