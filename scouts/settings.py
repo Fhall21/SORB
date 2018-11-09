@@ -41,7 +41,7 @@ DATABASES = {
 }
 
 #Seperating Production code with development code
-if not(DEBUG):
+if DEBUG:
     #Dev code:
     SECRET_KEY = "45112bk_q#pm4+sy@65s7dtqs5%7u54!++-u+kzggg*c@22dmb"
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
