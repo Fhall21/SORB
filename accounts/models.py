@@ -79,28 +79,28 @@ class UserProfile(models.Model):
 		
 	def save(self, *args, **kwargs):
 		
-			'''Leader_group = Group.objects.get(name="Leader")
-												Scout_group = Group.objects.get(name="Scouts")
-									
-												Premium_group = Group.objects.get(name="Premium")
-												Basic_group = Group.objects.get(name="Basic")
-												CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
-									
-												user = self.scout_username
-												user.groups.clear()
-												if self.role == 'Leader':
-													Leader_group.user_set.add(user)
-												elif self.role == 'Scout':
-													Scout_group.user_set.add(user)
-												else:
-													pass
-												if (CurrentTroopData.filter(subscription="Premium").exists()):
-													Premium_group.user_set.add(user)
-												elif (CurrentTroopData.filter(subscription="Basic").exists()):
-													Basic_group.user_set.add(user)
-												else:
-													pass
-												super(UserProfile, self).save(*args, **kwargs) fix'''
+			Leader_group = Group.objects.get(name="Leader")
+			Scout_group = Group.objects.get(name="Scouts")
+
+			Premium_group = Group.objects.get(name="Premium")
+			Basic_group = Group.objects.get(name="Basic")
+			CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
+
+			user = self.scout_username
+			user.groups.clear()
+			if self.role == 'Leader':
+				Leader_group.user_set.add(user)
+			elif self.role == 'Scout':
+				Scout_group.user_set.add(user)
+			else:
+				pass
+			if (CurrentTroopData.filter(subscription="Premium").exists()):
+				Premium_group.user_set.add(user)
+			elif (CurrentTroopData.filter(subscription="Basic").exists()):
+				Basic_group.user_set.add(user)
+			else:
+				pass
+			super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 
 	if created:
