@@ -94,12 +94,12 @@ class UserProfile(models.Model):
 				Scout_group.user_set.add(user)
 			else:
 				pass
-			if (CurrentTroopData.filter(subscription="Premium").exists()):
-				Premium_group.user_set.add(user)
-			elif (CurrentTroopData.filter(subscription="Basic").exists()):
-				Basic_group.user_set.add(user)
-			else:
-				pass
+			'''if (CurrentTroopData.filter(subscription="Premium").exists()):
+													Premium_group.user_set.add(user)
+												elif (CurrentTroopData.filter(subscription="Basic").exists()):
+													Basic_group.user_set.add(user)
+												else:
+													pass'''
 			super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 
