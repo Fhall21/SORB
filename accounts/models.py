@@ -11,7 +11,7 @@ import inspect, os
 from django.dispatch import receiver
 
 
-#from login.groups import Groups
+#from login.groups import Groups as gp
 
 # Create your models here.
 def list_maker(abbr, name):
@@ -53,13 +53,12 @@ class UserProfile(models.Model):
 
 	list_format_group = [(None, 'Click here to select the group')]
 
-#	list_format_group = []
-	'''
-	data_set = GroupRecord.objects.all()
+	list_format_group = []
+		data_set = GroupRecord.objects.all()
 	for i in data_set:
 		group_name = i.group
 		group_abbr = i.abbreviation
-		list_format_group.append(list_maker(group_abbr, group_name)) fix'''
+		list_format_group.append(list_maker(group_abbr, group_name))
 	tuple_format_group = tuple(list_format_group)
 	scout_username = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
 	Group_Choice = tuple_format_group
@@ -94,12 +93,12 @@ class UserProfile(models.Model):
 				Scout_group.user_set.add(user)
 			else:
 				pass
-			'''if (CurrentTroopData.filter(subscription="Premium").exists()):
-													Premium_group.user_set.add(user)
-												elif (CurrentTroopData.filter(subscription="Basic").exists()):
-													Basic_group.user_set.add(user)
-												else:
-													pass'''
+			if (CurrentTroopData.filter(subscription="Premium").exists()):
+				Premium_group.user_set.add(user)
+			elif (CurrentTroopData.filter(subscription="Basic").exists()):
+				Basic_group.user_set.add(user)
+			else:
+				pass
 			super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 
