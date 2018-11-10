@@ -60,7 +60,7 @@ else:
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 import dj_database_url
-db_from_env = dj_database_url.config('postgres://postgres:Merlin99@localhost:5432/sorb')
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
 
