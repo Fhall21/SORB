@@ -51,14 +51,14 @@
  
 
       {% else %}
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-info">
 <a class="navbar-brand mr-auto mr-lg-0" href="# ">Scout Online Record Book</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <div class="navbar-nav">
-<a class="nav-link" href="{% url 'accounts:login' slug=request.user.userprofile.troop %}">Login <span class="sr-only">(current)</span></a>
+    <div class="navbar-nav"> 
+<a class="nav-link" href="{% url 'login:login' %}">Login <span class="sr-only">(current)</span></a>
 </div>
 </div>
 </nav>

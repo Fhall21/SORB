@@ -17,7 +17,7 @@ import django_heroku, dj_database_url
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com.au', '127.0.0.1', 'sorb.herokuapp.com']
 
@@ -230,6 +230,7 @@ SCOUT_AUTHORIZED_URLS = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = 'email.service@sorb.com.au'
 EMAIL_HOST_PASSWORD = 'Sorb2018!'
@@ -237,6 +238,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 '''
 deployed?
