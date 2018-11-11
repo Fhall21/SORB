@@ -320,10 +320,10 @@ class PricingView(TemplateView):
 			print (request.session['Troop_abr'])
 
 			#Group Creation
-			'''if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
-													new_group = GroupRecord(group=request.session['Troop_id'], abbreviation=request.session['Troop_abr'], subscription=p_name)
-													new_group.save()
-									fix'''
+			if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
+				new_group = GroupRecord(group=request.session['Troop_id'], abbreviation=request.session['Troop_abr'], subscription=p_name)
+				new_group.save()
+
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username
 			created = User.objects.filter(username=Master_username).exists()
