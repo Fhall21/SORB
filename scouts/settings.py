@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku, dj_database_url
-
+from decouple import config
 
 
 
@@ -25,7 +25,7 @@ ALLOWED_HOSTS =  ['mysterious-hollows-62229.herokuapp.com', '.sorb.com.au', '127
 STRIPE_LIVE_PUBLIC_KEY = ''
 STRIPE_LIVE_SECRET_KEY = ''
 STRIPE_TEST_PUBLIC_KEY ='pk_test_HgBO3F1H2pQWJko5u58C0I15'
-STRIPE_TEST_SECRET_KEY = 'sk_test_2U9vLWdHhfiIsNI6UCewnOaP'
+STRIPE_TEST_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 
 STRIPE_LIVE_MODE = False
 
@@ -34,7 +34,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'sorb',
         'USER': 'postgres',
-        'PASSWORD': 'Merlin99',
+        'PASSWORD': config('db_password'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -43,7 +43,7 @@ DATABASES = {
 #Seperating Production code with development code
 if DEBUG:
     #Dev code:
-    SECRET_KEY = "45112bk_q#pm4+sy@65s7dtqs5%7u54!++-u+kzggg*c@22dmb"
+    SECRET_KEY = config('SECRET_KEY')
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 #    DATABASES = {
@@ -55,9 +55,11 @@ if DEBUG:
 
 else:
     # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
+    SECRET_KEY = config('SECRET_KEY', default='SOME+RANDOM+KEY(z9+3vnm(jb0u@&w68t#5_e8s9-lbfhv-')
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
 
 import dj_database_url
 db_from_env = dj_database_url.config()
@@ -232,8 +234,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'email.service@sorb.com.au'
-EMAIL_HOST_PASSWORD = 'Sorb2018!'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
@@ -264,8 +266,5 @@ SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
 '''
-if not(DEBUG):
-# Activate Django-Heroku.
-    django_heroku.settings(locals())
 
 
