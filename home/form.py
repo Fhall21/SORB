@@ -112,15 +112,15 @@ class PricingFormA(forms.Form):
 		}
 		)
 
-		AOldMasterPassword = forms.CharField(
-			help_text = 'An option to keep your old password upon renweing the membership. Not to be filled out if creating an account for your troop for the first time.',
-			widget = forms.PasswordInput(attrs={'class':'has-popover', 
-							'data-content':'help_text', 
-							'data-placement':'right', 
-							'data-container':'body'}),
-			required = False,
-			label= ' Previous Password: (Renewals only)',
-			)
+		'''AOldMasterPassword = forms.CharField(
+									help_text = 'An option to keep your old password upon renweing the membership. Not to be filled out if creating an account for your troop for the first time.',
+									widget = forms.PasswordInput(attrs={'class':'has-popover', 
+													'data-content':'help_text', 
+													'data-placement':'right', 
+													'data-container':'body'}),
+									required = False,
+									label= ' Previous Password: (Renewals only)',
+									)'''
 
 
 class PricingFormB(forms.Form):
@@ -157,3 +157,12 @@ class PricingFormB(forms.Form):
 		'max_value': "You chose a year from the future! No more time travelling please." 
 		}
 		)
+
+		Test_BTroop_email = forms.EmailField(
+			required=True,
+			label="Email",
+			error_messages={
+			'required': "um... you left the field blank. Please don't do that again.",
+			}
+
+			)

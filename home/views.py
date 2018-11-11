@@ -263,6 +263,7 @@ class PricingView(TemplateView):
 			request.session['Troop_id'] = form_info_b.cleaned_data['Test_BTroop_id']
 			request.session['Troop_abr'] = form_info_b.cleaned_data['Test_BTroop_abr']
 			request.session['Troop_fd_date'] = form_info_b.cleaned_data['Test_BTroop_fd_date']
+			contact_email = form_info_b.cleaned_data['Test_BTroop_email']
 
 			print('Form B:')
 			print (request.session.get('Troop_id', 'Nothing sorry'))
@@ -328,9 +329,9 @@ class PricingView(TemplateView):
 			request.session['username'] = Master_username
 			created = User.objects.filter(username=Master_username).exists()
 			print(created)
+			Mast_pass = str(request.session['Troop_abr']) + str(request.session['Troop_fd_date'])
 			if not(User.objects.filter(username=Master_username).exists()):
 				#user creation
-				Mast_pass = str(request.session['Troop_abr']) + str(request.session['Troop_fd_date'])
 				new_leader = User.objects.create_user(username=Master_username, password=Mast_pass, is_staff = True)
 				new_leader.save()
 
@@ -343,12 +344,24 @@ class PricingView(TemplateView):
 			#add staff status
 
 			#send email with details
-			subject = 'Welcome to SORB!'
+			to_list = []
+			to_list.append(contact_email)
+			reply_list = []
+			reply_list.append('email.service@sorb.com.au')
+
 			welcome_msg = 'Hey there! \nI am excited to have you as part of this! SORB aims to help reduce your stress when managing scout records and it provides a growing abundance of features to help you. To get started here are your login details: \n'
 			body_msg = 'Master username: {} \nMaster password: {} \n\n'.format(Master_username, Mast_pass)
 			closing_msg = 'If you have any trouble working things out, or if you have any feedback, please reply directly to this email. \n\nWelcome, \nFelix Hall'
 			msg = welcome_msg + body_msg + closing_msg
-			send_mail(subject, msg, 'felix.p.hall@gmail.com', [contact_email], fail_silently=False,) 
+			email = EmailMessage (
+				subject = 'Welcome to SORB!',
+				body=msg,
+				from_email='email.service@sorb.com.au',
+				reply_to=reply_list,
+				to=to_list,
+				headers={'Content-Type': 'text/plain'})
+			email.send()
+			#send_mail(subject, msg, 'felix.p.hall@gmail.com', [contact_email], fail_silently=False,) 
 
 			return redirect ('home_page:home')
 

@@ -108,8 +108,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 		for entry in reversed(inspect.stack()):
 #			print (entry[0].f_locals['request'].user)
 			try:
-				current_request = CrequestMiddleware.get_request()
-				user = current_request.user
+				#current_request = CrequestMiddleware.get_request()
+				user = None
+				#user = current_request.user
 			#	user = entry[0].f_locals['request'].user
 			except:
 				user = None
