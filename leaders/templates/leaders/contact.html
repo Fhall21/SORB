@@ -1,7 +1,15 @@
 {% extends 'admin/base_site.html' %}
 
 {% block pagestyling %}
-
+<style type="text/css">
+	#group_radio{
+    display: grid;
+    align-content: inline;
+    vertical-align: top;
+    grid-template-rows: 25%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+</style>
 {% endblock %}
 
 {% block content_title %}
@@ -26,4 +34,18 @@
 <br>
 <br><br>
 
+
+<script type="text/javascript">
+$(function(){
+	$('#group_radio').removeClass("form-control").addClass("container");
+	$('#group_radio').contents().replaceWith(function(){
+		return $("<div />", {html: $(this).html()});
+	});
+	$('#group_radio div:empty').remove();
+	$('#group_radio div').css({'justify-self': 'center'});
+	//replaceWith(function(){
+	});
+
+</script>
 {% endblock %}
+

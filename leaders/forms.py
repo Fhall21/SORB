@@ -28,7 +28,7 @@ class EmailForm(forms.Form):
 		)
 	group = forms.ChoiceField(
 		required=True,
-		#widget=forms.RadioSelect,
+		widget=forms.RadioSelect(attrs={'id':'group_radio'}),
 		choices=GroupChoices,
 		)
 

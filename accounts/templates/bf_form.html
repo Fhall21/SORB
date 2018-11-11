@@ -21,16 +21,16 @@
 	{# bound = has data #} 
 	{% if form.is_bound %}	}
 		{% if field.errors %}
-		{% render_field field class="form-control is-invalid" %}
-		{% for error in field.errors %}
-		<div class="invalid-feedback">
-			{{ error.as_p }}
-		</div>
-		{% endfor %}
-	{% else %}
-		{# else = form is valid -- show a green box #}
-		{% render_field field class="form-control is-valid" %}
-	{% endif %}
+			{% render_field field class="form-control is-invalid" %}
+			{% for error in field.errors %}
+				<div class="invalid-feedback">
+					{{ error.as_p }}
+				</div>
+			{% endfor %}
+		{% else %}
+			{# else = form is valid -- show a green box #}
+			{% render_field field class="form-control is-valid" %}
+		{% endif %}
 	{% else %}
 		{# else to if field is bound #}
 		{% render_field field class="form-control" %}
