@@ -11,7 +11,7 @@ import inspect, os
 from django.dispatch import receiver
 
 
-from login.groups import Groups as gp
+#from login.groups import Groups as gp
 
 # Create your models here.
 def list_maker(abbr, name):
