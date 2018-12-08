@@ -33,8 +33,13 @@ def blank_field(packaged_errors):
 				blank_arr[i] = True
 
 	for el in range(0, len(blank_arr)):
-		passed_list.append(blank_arr[el])
-	if len(passed_list) == 3:
+		#if el == 0 because the first field was not blank
+		#So check if field was blank by checking if el is in blank array
+
+		if el in blank_arr:
+			passed_list.append(blank_arr[el])
+	print (passed_list)
+	if len(passed_list) >= 3:
 		blank = True
 	return blank
 
@@ -201,7 +206,7 @@ class Contact(TemplateView):
 		if form_info.is_valid():
 			first_name = request.POST.get('first_name', '')
 			last_name = request.POST.get('last_name', '')
-			email = request.POST.get('email', '')
+			email_address = request.POST.get('email', '')
 			subject = request.POST.get('subject', '')
 			message = request.POST.get('message', '')
 
@@ -228,12 +233,10 @@ class Contact(TemplateView):
 				subject = subject,
 				body=('You have a query:\n{}\nFrom\n{} {}'.format(message, first_name, last_name)),
 				from_email='email.service@sorb.com.au',
-				reply_to=[email],
-				to=['felix.p.hall@gmail.com'],
+				reply_to=[email_address],
+				to=['felix.p.hall@gmail.com',],
 				headers={'Content-Type': 'text/plain'})
 			email.send()
-			msg = 'You have a query from {} {}, \n {}'.format(first_name, last_name, message)
-			send_mail(subject, msg, 'from@example.com', [email], fail_silently=False,) 
 
 			args.update({'success':True})
 		return render(request, self.template_name, args)
@@ -335,6 +338,7 @@ class PricingView(TemplateView):
 						abbreviation=request.session['Troop_abr'], subscription=p_name)
 				new_group.save()
 
+			_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0]
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username
 			created = User.objects.filter(username=Master_username).exists()
@@ -349,7 +353,7 @@ class PricingView(TemplateView):
 #				UserProfile.objects.create(scout_username=new_leader, troop=new_group)
 				new_leader.userprofile.scout_username = new_leader
 				new_leader.userprofile.role = 'Leader'
-				new_leader.userprofile.troop = str(request.session['Troop_abr'])
+				new_leader.userprofile.troop = _group.abbreviation
 				new_leader.userprofile.save()
 			#add staff status
 
@@ -405,6 +409,7 @@ class PricingView(TemplateView):
 			'formA': PricingFormA(),
 			'formB': PricingFormB(),
 			}
+
 
 			if B_Blank_test and A_Blank_test:
 				args['blank_error'] = True
