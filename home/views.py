@@ -352,7 +352,7 @@ class PricingView(TemplateView):
 			reply_list.append('email.service@sorb.com.au')
 
 			welcome_msg = 'Hey there! \nI am excited to have you as part of this! SORB aims to help reduce your stress when managing scout records and it provides a growing abundance of features to help you. To get started, here are your login details: \n'
-			body_msg = 'Master username: {} \nMaster password: {} \n\n'.format(Master_username, Mast_pass)
+			body_msg = 'Master username: {}\nMaster password: {}\n\n'.format(Master_username, Mast_pass)
 			closing_msg = 'If you have any trouble working things out, or if you have any feedback, please reply directly to this email. \n\nWelcome, \nFelix Hall'
 			msg = welcome_msg + body_msg + closing_msg
 			email = EmailMessage (
