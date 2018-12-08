@@ -224,6 +224,14 @@ class Contact(TemplateView):
 #				headers = {'Reply-To': email }
 #			)
 #			email.send()
+			email = EmailMessage (
+				subject = subject,
+				body=('You have a query:\n{}\nFrom\n{} {}'.format(message, first_name, last_name)),
+				from_email='email.service@sorb.com.au',
+				reply_to=[email],
+				to=['felix.p.hall@gmail.com'],
+				headers={'Content-Type': 'text/plain'})
+			email.send()
 			msg = 'You have a query from {} {}, \n {}'.format(first_name, last_name, message)
 			send_mail(subject, msg, 'from@example.com', [email], fail_silently=False,) 
 
@@ -322,10 +330,10 @@ class PricingView(TemplateView):
 			print (request.session['Troop_abr'])
 
 			#Group Creation
-			'''if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
-													new_group = GroupRecord(group=request.session['Troop_id'], 
-														abbreviation=request.session['Troop_abr'], subscription=p_name)
-													new_group.save() fix '''
+			if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
+				new_group = GroupRecord(group=request.session['Troop_id'], 
+						abbreviation=request.session['Troop_abr'], subscription=p_name)
+				new_group.save()
 
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username
@@ -349,7 +357,7 @@ class PricingView(TemplateView):
 			to_list = []
 			to_list.append(contact_email)
 			reply_list = []
-			reply_list.append('email.service@sorb.com.au')
+			reply_list.append('felix.p.hall@gmail.com')
 
 			welcome_msg = 'Hey there! \nI am excited to have you as part of this! SORB aims to help reduce your stress when managing scout records and it provides a growing abundance of features to help you. To get started, here are your login details: \n'
 			body_msg = 'Master username: {}\nMaster password: {}\n\n'.format(Master_username, Mast_pass)
