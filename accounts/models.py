@@ -52,7 +52,7 @@ class UserProfile(models.Model):
 
 	list_format_group = [(None, 'Click here to select the group')]
 
-	list_format_group = []
+	#list_format_group = []
 	data_set = GroupRecord.objects.all()
 	for i in data_set:
 		group_name = i.group
