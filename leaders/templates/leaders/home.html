@@ -21,10 +21,10 @@ a:link, a:visited {
 	<h2>What do you feel like doing today?</h2>
 <!-- changer couleur -->
 	<div>
-	<a href="{% url 'leaders:badge_request_quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Ticking off badgwork?</strong></a>
-	<a href="{% url 'admin:index'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Viewing scout progress/accounts</strong></a>
+	<a href="{% url 'leaders:badge_request_quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Badgwork</strong></a>
+	<a href="{% url 'admin:index'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Scout progress/Accounts</strong></a>
 	{% if PremiumAccess %}
-	<a href="{% url 'leaders:Report_Quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Printing badge report</strong></a>
+	<a href="{% url 'leaders:Report_Quantity'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Badge report</strong></a>
 	<a href="{% url 'leaders:contact'  %}" class="btn btn-info btn-lg btn-block"  role="button" id="buttons" aria-pressed="true"><strong>Contacting troop</strong></a>
 </div>
 	{% endif %}

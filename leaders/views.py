@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 
 from django.utils.decorators import method_decorator
 from scouts.decorators import group_required
@@ -15,6 +16,15 @@ from django.contrib.auth.models import User
 from accounts.models import UserProfile, UserProfileManager, UserManager, GroupRecord
 
 from leaders.badge_report import Badge_Reporter
+from leaders.Badge_list import BadgeList
+
+from leaders.utils import render_to_pdf
+
+#time stuff
+
+from datetime import date, datetime
+from dateutil.relativedelta import relativedelta
+from django.utils import timezone
 
 def group_required(group_names):
 	"""Requires user membership in at least one of the groups passed in."""
@@ -87,8 +97,17 @@ class ScoutView(TemplateView):
 class Report_Quantity(TemplateView):
 	template_name = 'leaders/report_quantity.html'
 
+
+
 	def get(self, request):
 
+		data = BadgeList(request, 1)
+		pioneer = data.pioneer()
+
+		
+		print(list(pioneer))
+		for e in list(pioneer):
+			print(pioneer[e])
 		args = {}
 		return render(request, self.template_name, args)
 
@@ -96,8 +115,37 @@ class Report_Quantity(TemplateView):
 class Badge_Report(TemplateView):
 	def get(self, request, month):
 
+
+		#getting troop name
+		_abbreviation = request.user.userprofile.troop
+		#GP = GroupRecord
+		GP_data = GroupRecord.objects.filter(abbreviation=_abbreviation)
+		GP_entry = GP_data[0]
+		_troop = GP_entry.group
+		print(_troop)
+
+		#times
+		current_time = timezone.now()
+		last_time = (current_time - relativedelta(months=month)).strftime("%d-%B %Y")
+		current_time_strf = current_time.strftime("%d-%B %Y")
+
+
+
+		pdf = render_to_pdf(request, 'pdf/badge_report.html', month=month, time_now=current_time_strf, time_then=last_time, troop=_troop)
+		if pdf:
+			
+			response =  HttpResponse(pdf, content_type='application/pdf')
+			filename = "Badge Report"
+			content = "inline; filename='%s'" %(filename)
+			download = request.GET.get("download")
+			if download:
+				content = "attachment; filename='%s'" %(filename)
+			response['Content-Disposition'] = content
+			return response
+		return HttpResponse("Not Found")
 		args = {}
-		return Badge_Reporter.Badge_Report(self, request, month)
+
+		#return Badge_Reporter.Badge_Report(self, request, month)
 
 
 @method_decorator(staff_member_required, name='get')
@@ -142,7 +190,7 @@ class ContactView(TemplateView):
 			for user in results:
 				every_user_list.append(user)
 
-			#filtering bsaed on group
+			#filtering bsaed on role
 			if _group == 'Leader' or _group == 'Scouts':
 				refined_user_list = email_groups(_group, every_user_list)
 			else:
@@ -151,6 +199,7 @@ class ContactView(TemplateView):
 			email_list = []
 			for user in refined_user_list:
 				email_list.append(user.email)
+				email_list.append(user.userprofile.secondary_email)
 			#other email stuff
 			first_name = request.user.first_name
 			last_name = request.user.last_name

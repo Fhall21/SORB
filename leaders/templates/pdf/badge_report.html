@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+     <head>
+        <title>Scout Badge Report</title>
+     </head>
+     <body>
+        <header>{{ troop }} Badge Record, {{ time_then }} to {{ time_now }}</header>
+         <h1>{{ month }} Month Scout Badge Report</h1>
+        <h2>Pioneer</h2>
+        <table style="width:100%">
+            <tr>
+                <th>Badge</th>
+                <th>Scout</th>
+            </tr>
+       {% for badge, names in pioneer.items %}
+            <tr>
+                <td>{{ badge }}</td>
+                <td>
+                    <ul>
+                    {% for name in names %}
+                    <li> {{ name }} </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Explorer</h2>
+        <table style="width:100%">
+            <tr>
+                <th>Badge</th>
+                <th>Scout</th>
+            </tr>
+       {% for badge, names in explorer.items %}
+            <tr>
+                <td>{{ badge }}</td>
+                <td>
+                    <ul>
+                    {% for name in names %}
+                    <li> {{ name }} </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Adventurer</h2>
+        <table style="width:100%">
+            <tr>
+                <th>Badge</th>
+                <th>Scout</th>
+            </tr>
+       {% for badge, names in adventurer.items %}
+            <tr>
+                <td>{{ badge }}</td>
+                <td>
+                    <ul>
+                    {% for name in names %}
+                    <li> {{ name }} </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Other</h2>
+        <table style="width:100%">
+            <tr>
+                <th>Badge</th>
+                <th>Scout</th>
+            </tr>
+       {% for badge, names in other.items %}
+            <tr>
+                <td>{{ badge }}</td>
+                <td>
+                    <ul>
+                    {% for name in names %}
+                    <li> {{ name }} </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+     </body>
+ </html>
