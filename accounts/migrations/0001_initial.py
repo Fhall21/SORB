@@ -31,7 +31,6 @@ class Migration(migrations.Migration):
                 ('troop', models.SlugField(choices=[('NA', 'Admin')], default='None', max_length=27)),
                 ('role', models.CharField(choices=[('Leader', 'Leader'), ('Scout', 'Scout')], default='Scout', max_length=7)),
                 ('date_of_birth', models.DateField(default=datetime.date.today, null=True)),
-                ('secondary_email', models.EmailField(blank=True, max_length=254, null=True, unique=True)),
                 ('scout_username', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
