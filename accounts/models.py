@@ -14,6 +14,39 @@ from django.dispatch import receiver
 #from login.groups import Groups as gp
 
 # Create your models here.
+
+class GroupDataRetriever():
+	def __init__(self):
+		list_format_group = [(None, 'Click here to select the group')]
+		self.list_format_group = list_format_group
+		
+		tuple_format_group = tuple(self.list_format_group)
+		
+		Group_Choice = tuple_format_group
+		self.Group_Choice = Group_Choice 
+
+	def refreshed(self):
+		list_format_group = [(None, 'Click here to select the group')]
+
+		#list_format_group = []
+		data_set = GroupRecord.objects.all()
+		#print (data_set)
+		for i in data_set:
+			group_name = i.group
+			group_abbr = i.abbreviation
+			list_format_group.append(list_maker(group_abbr, group_name))
+		tuple_format_group = tuple(list_format_group)
+		
+		Group_Choice = tuple_format_group
+		self.Group_Choice = Group_Choice
+		print ('refreshed')
+
+	def retrieve(self):
+		print ('updated')
+		print (self.Group_Choice)
+		return self.Group_Choice
+
+
 def list_maker(abbr, name):
 	list_group = (str(abbr), str(name))
 	return list_group
@@ -23,7 +56,7 @@ class GroupRecord(models.Model):
 		('Basic', 'Basic'),
 		('Premium', 'Premium')
 		)
-	group = models.CharField(max_length=100)
+	group = models.CharField(max_length=100, default='None')
 	abbreviation = models.CharField(max_length=80)
 	subscription = models.CharField(choices=plan_choice, max_length=8, default='Basic', blank=False)
 
@@ -50,26 +83,39 @@ class UserProfileAdminManager(models.AdminManager):
 '''
 class UserProfile(models.Model):
 
+	def __init__(self, *args, **kwargs):
+		super(UserProfile, self).__init__(*args, **kwargs)
+
+		#print ('REFRESHED')
+		
+		
+	data = GroupDataRetriever()
+	role_choice = (
+		('Leader', 'Leader'),
+		('Scout', 'Scout')
+		)
 	list_format_group = [(None, 'Click here to select the group')]
 
 	#list_format_group = []
 	data_set = GroupRecord.objects.all()
+	#print (data_set)
 	for i in data_set:
 		group_name = i.group
 		group_abbr = i.abbreviation
 		list_format_group.append(list_maker(group_abbr, group_name))
 	tuple_format_group = tuple(list_format_group)
-	scout_username = models.OneToOneField(User, on_delete=models.CASCADE, unique=True) 
+	
 	Group_Choice = tuple_format_group
-	role_choice = (
-		('Leader', 'Leader'),
-		('Scout', 'Scout')
-		)
-#	troop = models.ForeignKey(GroupRecord, on_delete=models.CASCADE, null=True)
+		
+
+
+	print ('called userprofile')
+	#troop = models.OneToOneField(GroupRecord, on_delete=models.CASCADE, unique=False, null=True)
 	troop = models.SlugField(max_length=27, choices=Group_Choice, default='None', blank=False)
 	role = models.CharField(choices = role_choice, max_length=7, default='Scout', blank=False)
 	date_of_birth = models.DateField(default=date.today, null=True)
 	secondary_email = models.EmailField(blank=True, unique=True, null=True, max_length=250)
+	scout_username = models.OneToOneField(User, on_delete=models.CASCADE, unique=True) 
 
 
 	def __str__(self):
@@ -77,7 +123,8 @@ class UserProfile(models.Model):
 
 		
 	def save(self, *args, **kwargs):
-		
+		data = GroupDataRetriever()
+		data.refreshed()
 		Leader_group = Group.objects.get(name="Leader")
 		Scout_group = Group.objects.get(name="Scouts")
 

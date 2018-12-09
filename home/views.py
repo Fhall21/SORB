@@ -62,6 +62,24 @@ class WelcomeView(TemplateView):
 
 	def get(self, request):
 
+		#refreshing teh databases
+		#the grouprecord one first
+		
+		'''_new_group, ng_created = GroupRecord.objects.get_or_create(group='Admin3', 
+										abbreviation='N/A3', subscription='Premium')
+								if ng_created:
+									_new_group.save()
+								temp_user, user_created = User.objects.get_or_create(username='temp_user5', password='temp2018', is_staff=True)
+								if user_created:
+									temp_user.save()
+								#up = userprofile
+								print (temp_user)
+								temp_user.userprofile.scout_username = temp_user
+								temp_user.userprofile.role= 'Leader'
+								temp_user.userprofile.troop = _new_group.group
+								temp_user.userprofile.save()
+								temp_user.delete()
+								_new_group.delete()'''
 		#to do
 		#check if troop name is already in database, if so, retrieve its master login
 		#else
@@ -334,11 +352,12 @@ class PricingView(TemplateView):
 
 			#Group Creation
 			if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
-				new_group = GroupRecord(group=request.session['Troop_id'], 
+				new_group = GroupRecord.objects.create(group=request.session['Troop_id'], 
 						abbreviation=request.session['Troop_abr'], subscription=p_name)
 				new_group.save()
 
 			_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0]
+			print ('group: {}'.format(_group))
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username
 			created = User.objects.filter(username=Master_username).exists()
@@ -355,6 +374,9 @@ class PricingView(TemplateView):
 				new_leader.userprofile.role = 'Leader'
 				new_leader.userprofile.troop = _group.abbreviation
 				new_leader.userprofile.save()
+				new_leader.userprofile.refresh_from_db()
+
+
 			#add staff status
 
 			#send email with details
