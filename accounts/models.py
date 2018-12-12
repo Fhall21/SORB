@@ -16,7 +16,7 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-class GroupDataRetriever():
+'''class GroupDataRetriever():
 	def __init__(self):
 		list_format_group = [(None, 'Click here to select the group')]
 		self.list_format_group = list_format_group
@@ -33,7 +33,7 @@ class GroupDataRetriever():
 	def retrieve(self):
 		print ('updated')
 		print (self.Group_Choice)
-		return self.Group_Choice
+		return self.Group_Choice fix '''
 
 
 def list_maker(abbr, name):
@@ -78,7 +78,7 @@ class UserProfile(models.Model):
 		#print ('REFRESHED')
 		
 		
-	data = GroupDataRetriever()
+	#data = GroupDataRetriever()
 	role_choice = (
 		('Leader', 'Leader'),
 		('Scout', 'Scout')
@@ -86,15 +86,15 @@ class UserProfile(models.Model):
 	list_format_group = [(None, 'Click here to select the group')]
 
 	#list_format_group = []
-	data_set = GroupRecord.objects.all()
-	#print (data_set)
-	for i in data_set:
-		group_name = i.group
-		group_abbr = i.abbreviation
-		list_format_group.append(list_maker(group_abbr, group_name))
-	tuple_format_group = tuple(list_format_group)
-	
-	Group_Choice = tuple_format_group
+	'''data_set = GroupRecord.objects.all()
+				#print (data_set)
+				for i in data_set:
+					group_name = i.group
+					group_abbr = i.abbreviation
+					list_format_group.append(list_maker(group_abbr, group_name)) fix'''
+	'''tuple_format_group = tuple(list_format_group)
+				
+				Group_Choice = tuple_format_group'''
 		
 
 
@@ -122,7 +122,7 @@ class UserProfile(models.Model):
 
 		Premium_group = Group.objects.get(name="Premium")
 		Basic_group = Group.objects.get(name="Basic")
-		CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
+		#CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop) fix
 
 		user = self.scout_username
 		user.groups.clear()
@@ -132,12 +132,12 @@ class UserProfile(models.Model):
 			Scout_group.user_set.add(user)
 		else:
 			pass
-		if (CurrentTroopData.filter(subscription="Premium").exists()):
-			Premium_group.user_set.add(user)
-		elif (CurrentTroopData.filter(subscription="Basic").exists()):
-			Basic_group.user_set.add(user)
-		else:
-			pass 
+		'''if (CurrentTroopData.filter(subscription="Premium").exists()):
+									Premium_group.user_set.add(user)
+								elif (CurrentTroopData.filter(subscription="Basic").exists()):
+									Basic_group.user_set.add(user)
+								else:
+									pass  fix '''
 		super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 

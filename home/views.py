@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from home.models import ContactForm, Payments
-from accounts.models import UserProfile, GroupRecord 
+from accounts.models import UserProfile#, GroupRecord fix
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import get_template
 from scouts import settings
@@ -351,13 +351,13 @@ class PricingView(TemplateView):
 			print (request.session['Troop_abr'])
 
 			#Group Creation
-			if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
-				new_group = GroupRecord.objects.create(group=request.session['Troop_id'], 
-						abbreviation=request.session['Troop_abr'], subscription=p_name)
-				new_group.save()
-
-			_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0]
-			print ('group: {}'.format(_group))
+			'''if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
+													new_group = GroupRecord.objects.create(group=request.session['Troop_id'], 
+															abbreviation=request.session['Troop_abr'], subscription=p_name)
+													new_group.save()
+									
+												_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0] fix '''
+			#print ('group: {}'.format(_group))
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username
 			created = User.objects.filter(username=Master_username).exists()
@@ -372,7 +372,7 @@ class PricingView(TemplateView):
 #				UserProfile.objects.create(scout_username=new_leader, troop=new_group)
 				new_leader.userprofile.scout_username = new_leader
 				new_leader.userprofile.role = 'Leader'
-				new_leader.userprofile.troop_details = _group
+				#new_leader.userprofile.troop_details = _group
 				new_leader.userprofile.save()
 				new_leader.userprofile.refresh_from_db()
 
