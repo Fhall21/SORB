@@ -15,15 +15,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='GroupRecord',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('group', models.CharField(default='None', max_length=100)),
-                ('abbreviation', models.CharField(max_length=80)),
-                ('subscription', models.CharField(choices=[('Basic', 'Basic'), ('Premium', 'Premium')], default='Basic', max_length=8)),
-            ],
-        ),
+    
         migrations.CreateModel(
             name='UserProfile',
             fields=[
