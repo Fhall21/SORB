@@ -63,6 +63,7 @@ class UserCreateForm(UserCreationForm):
 
 class UserProfileInline(admin.StackedInline):
 	model = UserProfile
+	exclude = ['troop']
 	can_delete = False
 	verbose_name_plural = 'UserProfile'
 	fk_name = 'scout_username'
@@ -96,7 +97,7 @@ class CustomUserAdmin(UserAdmin):
 			'fields': ('username', 'email', 'password1', 'password2'),
 		}),
 	)
-	#custom user view
+	#custom user view, I add the userprofile details
 	inlines = (UserProfileInline, )
 
 	list_display = ('username', 
