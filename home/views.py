@@ -372,7 +372,7 @@ class PricingView(TemplateView):
 #				UserProfile.objects.create(scout_username=new_leader, troop=new_group)
 				new_leader.userprofile.scout_username = new_leader
 				new_leader.userprofile.role = 'Leader'
-				new_leader.userprofile.troop = _group.abbreviation
+				new_leader.userprofile.troop_details = _group
 				new_leader.userprofile.save()
 				new_leader.userprofile.refresh_from_db()
 
