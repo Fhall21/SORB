@@ -101,7 +101,7 @@ class UserProfile(models.Model):
 	print ('called userprofile')
 	troop_details = models.ForeignKey(GroupRecord, on_delete=models.CASCADE, unique=False, null=True)
 	#troop_details = models.SlugField(max_length=27, choices=Group_Choice, default='None', blank=False)
-	troop = models.SlugField(max_length=75, unique=False)
+	troop = models.SlugField(max_length=75, unique=False, null=True)
 	role = models.CharField(choices = role_choice, max_length=7, default='Scout', blank=False)
 	date_of_birth = models.DateField(default=date.today, null=True)
 	secondary_email = models.EmailField(blank=True, unique=True, null=True, max_length=250)
