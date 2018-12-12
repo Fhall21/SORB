@@ -10,7 +10,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from home.models import ContactForm, Payments
-from accounts.models import UserProfile#, GroupRecord fix
+from accounts.models import UserProfile, GroupRecord
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import get_template
 from scouts import settings
@@ -372,7 +372,7 @@ class PricingView(TemplateView):
 #				UserProfile.objects.create(scout_username=new_leader, troop=new_group)
 				new_leader.userprofile.scout_username = new_leader
 				new_leader.userprofile.role = 'Leader'
-				#new_leader.userprofile.troop_details = _group
+				new_leader.userprofile.troop_details = _group
 				new_leader.userprofile.save()
 				new_leader.userprofile.refresh_from_db()
 
