@@ -126,7 +126,7 @@ class UserProfile(models.Model):
 
 		Premium_group = Group.objects.get(name="Premium")
 		Basic_group = Group.objects.get(name="Basic")
-		#CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop) fix
+		CurrentTroopData = GroupRecord.objects.filter(abbreviation=self.troop)
 
 		user = self.scout_username
 		user.groups.clear()
