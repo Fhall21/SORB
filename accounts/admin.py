@@ -33,6 +33,7 @@ admin.site.register(ScoutData, ScoutDataAdmin)
 
 class UserProfileAdmin(admin.ModelAdmin):
 	admin_objects = UserProfileManager()
+	exclude = ['troop']
 	list_display = (
 	'user', 'age')
 

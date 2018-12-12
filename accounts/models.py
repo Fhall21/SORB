@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from crequest.middleware import CrequestMiddleware
+from slugger import AutoSlugField
 
-
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User, Group
 from django.db.models.signals import post_save
 from datetime import date
@@ -26,20 +27,8 @@ class GroupDataRetriever():
 		self.Group_Choice = Group_Choice 
 
 	def refreshed(self):
-		list_format_group = [(None, 'Click here to select the group')]
+		self.slug = slugify(self.troop_details)
 
-		#list_format_group = []
-		data_set = GroupRecord.objects.all()
-		#print (data_set)
-		for i in data_set:
-			group_name = i.group
-			group_abbr = i.abbreviation
-			list_format_group.append(list_maker(group_abbr, group_name))
-		tuple_format_group = tuple(list_format_group)
-		
-		Group_Choice = tuple_format_group
-		self.Group_Choice = Group_Choice
-		print ('refreshed')
 
 	def retrieve(self):
 		print ('updated')
@@ -110,8 +99,9 @@ class UserProfile(models.Model):
 
 
 	print ('called userprofile')
-	#troop = models.OneToOneField(GroupRecord, on_delete=models.CASCADE, unique=False, null=True)
-	troop = models.SlugField(max_length=27, choices=Group_Choice, default='None', blank=False)
+	troop_details = models.ForeignKey(GroupRecord, on_delete=models.CASCADE, unique=False, null=True)
+	#troop_details = models.SlugField(max_length=27, choices=Group_Choice, default='None', blank=False)
+	troop = models.SlugField(max_length=500, unique=False)
 	role = models.CharField(choices = role_choice, max_length=7, default='Scout', blank=False)
 	date_of_birth = models.DateField(default=date.today, null=True)
 	secondary_email = models.EmailField(blank=True, unique=True, null=True, max_length=250)
@@ -123,8 +113,10 @@ class UserProfile(models.Model):
 
 		
 	def save(self, *args, **kwargs):
-		data = GroupDataRetriever()
-		data.refreshed()
+		#slugifying the troop
+		self.troop = slugify(self.troop_details)
+		
+
 		Leader_group = Group.objects.get(name="Leader")
 		Scout_group = Group.objects.get(name="Scouts")
 
@@ -165,9 +157,9 @@ def create_user_profile(sender, instance, created, **kwargs):
 		print ('user: {}'.format(user))
 		if user:
 			try:
-				print ('yay!')
+				#print ('yay')
 				UserProfile.objects.create(scout_username=instance, 
-					troop=user.userprofile.troop)
+					troop=user.userprofile.troop, troop_details=user.userprofile.troop_details)
 			except (AttributeError):
 
 				UserProfile.objects.create(scout_username=instance) 
