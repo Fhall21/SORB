@@ -116,9 +116,9 @@ class Badge_Report(TemplateView):
 
 
 		#getting troop name
-		_abbreviation = request.user.userprofile.troop
+		_group_name = request.user.userprofile.troop_details
 		#GP refers to GroupRecord
-		GP_data = GroupRecord.objects.filter(abbreviation=_abbreviation)
+		GP_data = GroupRecord.objects.filter(group=_group_name)
 		GP_entry = GP_data[0]
 		_troop = GP_entry.group
 		#temp
