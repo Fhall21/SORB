@@ -65,15 +65,16 @@ class WelcomeView(TemplateView):
 		#refreshing teh databases
 		#the grouprecord one first
 		
-		'''_new_group, ng_created = GroupRecord.objects.get_or_create(group='Admin3', 
-										abbreviation='N/A3', subscription='Premium')
+		'''
+		unecessary
+		_new_group, ng_created = GroupRecord.objects.get_or_create(group='Admin3', 
+									abbreviation='N/A3', subscription='Premium')
 								if ng_created:
 									_new_group.save()
 								temp_user, user_created = User.objects.get_or_create(username='temp_user5', password='temp2018', is_staff=True)
 								if user_created:
 									temp_user.save()
-								#up = userprofile
-								print (temp_user)
+								#up refers to userprofile
 								temp_user.userprofile.scout_username = temp_user
 								temp_user.userprofile.role= 'Leader'
 								temp_user.userprofile.troop = _new_group.group
@@ -259,7 +260,6 @@ class Contact(TemplateView):
 			args.update({'success':True})
 		return render(request, self.template_name, args)
 			
-			#try send_mail if it does not work
 
 class PricingView(TemplateView):
 	template_name = 'home/pricing2.html'
@@ -351,12 +351,12 @@ class PricingView(TemplateView):
 			print (request.session['Troop_abr'])
 
 			#Group Creation
-			'''if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
-													new_group = GroupRecord.objects.create(group=request.session['Troop_id'], 
-															abbreviation=request.session['Troop_abr'], subscription=p_name)
-													new_group.save()
-									
-												_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0] fix '''
+			if not(GroupRecord.objects.filter(group=request.session['Troop_id']).exists()):
+				new_group = GroupRecord.objects.create(group=request.session['Troop_id'], 
+						abbreviation=request.session['Troop_abr'], subscription=p_name)
+				new_group.save()
+
+			_group = GroupRecord.objects.filter(group=request.session['Troop_id'])[0]
 			#print ('group: {}'.format(_group))
 			Master_username = 'Master' + str(request.session['Troop_abr'])
 			request.session['username'] = Master_username

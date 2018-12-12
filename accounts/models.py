@@ -16,7 +16,9 @@ from django.dispatch import receiver
 
 # Create your models here.
 
-'''class GroupDataRetriever():
+'''
+created with the purpose of retrieving the GroupRecord data so that the model will update. Did not work
+class GroupDataRetriever():
 	def __init__(self):
 		list_format_group = [(None, 'Click here to select the group')]
 		self.list_format_group = list_format_group
@@ -86,7 +88,9 @@ class UserProfile(models.Model):
 	list_format_group = [(None, 'Click here to select the group')]
 
 	#list_format_group = []
-	'''data_set = GroupRecord.objects.all()
+	'''
+	Making a list of selection for users to select their troop from
+	data_set = GroupRecord.objects.all()
 				#print (data_set)
 				for i in data_set:
 					group_name = i.group
@@ -132,12 +136,12 @@ class UserProfile(models.Model):
 			Scout_group.user_set.add(user)
 		else:
 			pass
-		'''if (CurrentTroopData.filter(subscription="Premium").exists()):
-									Premium_group.user_set.add(user)
-								elif (CurrentTroopData.filter(subscription="Basic").exists()):
-									Basic_group.user_set.add(user)
-								else:
-									pass  fix '''
+		if (CurrentTroopData.filter(subscription="Premium").exists()):
+			Premium_group.user_set.add(user)
+		elif (CurrentTroopData.filter(subscription="Basic").exists()):
+			Basic_group.user_set.add(user)
+		else:
+			pass 
 		super(UserProfile, self).save(*args, **kwargs)
 
 def create_user_profile(sender, instance, created, **kwargs): 

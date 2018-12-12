@@ -13,7 +13,7 @@ from django.core.mail import EmailMessage, send_mail
 from leaders.forms import BadgeForm, EmailForm
 from leaders.models import ScoutData
 from django.contrib.auth.models import User
-from accounts.models import UserProfile, UserProfileManager, UserManager#, GroupRecord fix
+from accounts.models import UserProfile, UserProfileManager, UserManager, GroupRecord
 
 from leaders.badge_report import Badge_Reporter
 from leaders.Badge_list import BadgeList
@@ -59,7 +59,6 @@ def email_groups(group, user_list):
 	return query_list
 
 
-# Create your views here
 @method_decorator(user_passes_test(leader_check), name='get')
 class HomeView(TemplateView):
 	template_name = 'leaders/home.html'
@@ -118,12 +117,11 @@ class Badge_Report(TemplateView):
 
 		#getting troop name
 		_abbreviation = request.user.userprofile.troop
-		#GP = GroupRecord
-		'''GP_data = GroupRecord.objects.filter(abbreviation=_abbreviation)
-								GP_entry = GP_data[0]
-								_troop = GP_entry.group fix'''
+		#GP refers to GroupRecord
+		GP_data = GroupRecord.objects.filter(abbreviation=_abbreviation)
+		GP_entry = GP_data[0]
+		_troop = GP_entry.group
 		#temp
-		_troop = 'Admin' 
 		print(_troop)
 
 		#times
