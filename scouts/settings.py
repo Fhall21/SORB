@@ -228,7 +228,8 @@ SCOUT_AUTHORIZED_URLS = {
 
 
 }
-'''#finish setting up email
+'''
+#finish setting up email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

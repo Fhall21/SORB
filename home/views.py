@@ -220,7 +220,7 @@ class Contact(TemplateView):
 	def post(self, request):
 		form = ContactForm()		
 		args = {'form': form}
-
+		
 		form_info = ContactForm(request.POST)
 		if form_info.is_valid():
 			first_name = request.POST.get('first_name', '')
