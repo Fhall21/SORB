@@ -22,7 +22,7 @@ defusedxml==0.5.0
 distlib==0.2.8
 dj-database-url==0.5.0
 dj-stripe==1.2.0
-Django==2.1.11
+Django==2.2.13
 django-appconf==1.0.2
 django-audit-log==0.7.0
 django-crequest==2018.5.11
