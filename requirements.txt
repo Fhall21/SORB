@@ -54,7 +54,7 @@ pipenv==2018.10.13
 placebo==0.8.2
 psycopg2==2.7.5
 pycparser==2.18
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 Pyphen==0.9.5
 python-dateutil==2.6.1
 python-decouple==3.1
